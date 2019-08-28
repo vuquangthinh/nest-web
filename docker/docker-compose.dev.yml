@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  estoryc-superadmin:
+    build:
+      context: ../
+      dockerfile: Dockerfile.dev
+      args:
+        - API_URL=http://api.estoryc
+
+    image: ${DOCKER_IMAGE}
+    restart: unless-stopped
+    ports:
+      - 3020:8000

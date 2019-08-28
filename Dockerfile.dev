@@ -1,0 +1,19 @@
+FROM node:alpine
+
+ARG API_URL=http://localhost:3000
+ENV APP__API_URL=${API_URL}
+
+ARG APP_BUILD_ID=1
+ENV APP__BUILD_ID=${APP_BUILD_ID}
+
+ENV CI=true
+
+WORKDIR /usr/src/app/
+
+COPY package.json ./
+RUN yarn
+
+COPY ./ ./
+
+
+CMD yarn start

@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+
+
+  :global {
+    .selected-flag {
+      outline: none;
+    }
+    input {
+      outline: none;
+      height: 40px;
+      border: solid 1px #e6e8f0;
+
+      &:focus {
+        border-color: #ff6f47;
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba(255, 71, 30, 0.2);
+      }
+    }
+
+    .country-list {
+      width: 100%;
+      overflow-x: hidden;
+      .country {
+        line-height: 30px;
+      }
+    }
+  }
+}

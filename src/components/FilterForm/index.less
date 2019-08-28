@@ -1,0 +1,31 @@
+
+
+.container {
+  background: @mark-color;
+  padding: 10px 20px;
+
+  color: @content-background-color;
+
+  :global {
+    .ant-form-item-label > label {
+      color: @content-background-color;
+      font-weight: normal;
+    }
+    .ant-input {
+      outline: none;
+      box-shadow: none;
+    }
+    .ant-btn[type=submit] {
+      font-weight: normal;
+      font-size: 14px;
+      color: @content-background-color;
+      height: 40px;
+    }
+
+    .ant-calendar-picker-clear {
+      background: transparent;
+      color: @content-background-color;
+    }
+  }
+}
+

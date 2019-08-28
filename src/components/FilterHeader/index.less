@@ -1,0 +1,43 @@
+.content,
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container {
+  border-bottom: solid 1px @border-color-base;
+  :global {
+    .ant-tabs {
+      .ant-tabs-bar {
+        border-bottom: 0;
+        margin-bottom: 0;
+      }
+      .ant-tabs-tab {
+        color: #878da3;
+        margin: 0;
+        padding: 25px 40px;
+        font-size: 16px;
+        line-height: 19px;
+      }
+      .ant-tabs-tab-active {
+        color: #0d132e;
+      }
+      .ant-tabs-ink-bar {
+        height: 3px;
+      }
+    }
+
+    .ant-btn {
+      margin-left: 20px;
+      padding: 9px 18px;
+      height: auto;
+
+      background: transparent;
+    }
+    .ant-btn-primary {
+      background: @primary-color;
+    }
+  }
+}

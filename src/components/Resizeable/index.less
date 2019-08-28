@@ -1,0 +1,117 @@
+
+
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.resize {
+  cursor: nwse-resize;
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  width: 10px;
+  height: 10px;
+  border-right: solid 2px #fff;
+  border-bottom: solid 2px #fff;
+}
+
+.resizing {
+  outline: dashed 1px #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+
+  margin: 5px;
+}
+
+.resizeTop,
+.resizeLeft,
+.resizeBottom,
+.resizeRight,
+.resizeTopLeft,
+.resizeTopRight,
+.resizeBottomLeft,
+.resizeBottomRight {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+
+  margin: 5px;
+}
+
+.resizeTop {
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-top: solid 2px #fff;
+  cursor: ns-resize;
+}
+
+.resizeLeft {
+  top: 50%;
+  margin-top: -5px;
+  left: 0;
+  border-left: solid 2px #fff;
+  cursor: ew-resize;
+}
+
+.resizeBottom {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-bottom: solid 2px #fff;
+  cursor: ns-resize;
+}
+
+.resizeRight {
+  right: 0;
+  top: 50%;
+  margin-top: -5px;
+  border-right: solid 2px #fff;
+  cursor: ew-resize;
+}
+
+.resizeTopLeft {
+  top: 0;
+  left: 0;
+
+  border-top: solid 2px #fff;
+  border-left: solid 2px #fff;
+  cursor: nwse-resize;
+}
+
+.resizeTopRight {
+  top: 0;
+  right: 0;
+  border-top: solid 2px #fff;
+  border-right: solid 2px #fff;
+  cursor: nesw-resize;
+}
+
+.resizeBottomLeft {
+  bottom: 0;
+  left: 0;
+  border-bottom: solid 2px #fff;
+  border-left: solid 2px #fff;
+  cursor: nesw-resize;
+}
+
+.resizeBottomRight {
+  bottom: 0;
+  right: 0;
+  border-bottom: solid 2px #fff;
+  border-right: solid 2px #fff;
+  cursor: nwse-resize;
+}
+
+
+.content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}

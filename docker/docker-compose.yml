@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  estoryc-superadmin:
+    image: ${DOCKER_IMAGE}
+    # build:
+    #   context: ../
+    #   dockerfile: Dockerfile
+    #   args:
+    #     - API_URL=http://localhost:3000
+    restart: unless-stopped
+    ports:
+      - 3020:80
+
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./home.html:/usr/share/nginx/html/index.html

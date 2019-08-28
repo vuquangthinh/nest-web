@@ -1,0 +1,124 @@
+pipeline {
+  environment {
+		registry = "agiletechvietnam/estoryc-admin"
+		registryCredential = 'dockerhub'
+    dockerImage = ''
+
+    serverUser = 'jenkins'
+    serverIp = '35.247.171.153'
+    uatServerIp = '34.67.72.96'
+    deployPath = '/opt/estoryc/admin'
+
+    projectKey = 'eStoryc-frontend'
+    sonarHost = 'https://sonar.agiletech.vn'
+    sonarLogin = 'f9d86cbe066de725023b2a1e777e39cb8ec87ccc'
+
+    DOCKER_REGISTRY_URL = 'http://registry'
+
+    ESTORY_API_URL = 'http://35.247.171.153:8080'
+
+    // default as develop
+    API_URL = 'http://localhost:3020'
+	}
+
+  agent any
+
+  stages {
+    stage('Environment') {
+      script {
+        if (env.BRANCH_NAME == 'staging') {
+          DOCKER_REGISTRY_URL = 'https://eu.gcr.io/excellent-guard-248213'
+
+          API_URL = 'http://api-p7.agiletech.vn'
+        }
+
+        if (env.BRANCH_NAME == 'prod') {
+          DOCKER_REGISTRY_URL = 'https://eu.gcr.io/glossy-essence-248121'
+
+          API_URL = 'https://api.zmooz.com'
+        }
+      }
+    }
+
+    stage('Build') {
+      when {
+        anyOf {
+          branch 'develop'
+          branch 'staging'
+          branch 'prod'
+        }
+      }
+      steps {
+        script {
+          mattermostSend(
+            color: 'good',
+            icon: 'https://jenkins.io/images/logos/jenkins/jenkins.png',
+            message: "Start to build W7 web admin branch: $BRANCH_NAME",
+            channel: 'jenkins'
+          )
+
+          dockerImage = docker.build(registry + ":$BRANCH_NAME.$BUILD_NUMBER", "--build-arg APP_BUILD_ID=${env.BUILD_NUMBER} --build-arg API_URL=${API_URL} -f Dockerfile .")
+        }
+      }
+    }
+
+    stage('Push image') {
+      when {
+        anyOf {
+          branch 'develop'
+          branch 'staging'
+          branch 'prod'
+        }
+      }
+      steps {
+        script {
+          docker.withRegistry(DOCKER_REGISTRY_URL, DOCKER_REGISTRY_CREDENTIAL) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+
+    stage('Deploy') {
+      when {
+        anyOf {
+          branch 'develop'
+          branch 'staging'
+          branch 'prod'
+        }
+      }
+
+      steps {
+        script {
+          if (env.BRANCH_NAME == 'develop') {
+            withCredentials([sshUserPrivateKey(credentialsId: "estoryc-jenkins", keyFileVariable: 'keyfile'),
+              usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'dockerUser', passwordVariable: 'dockerPass')]) {
+
+              sh "scp -o StrictHostKeyChecking=no -i ${keyfile} -r -v docker/* ${serverUser}@${serverIp}:${deployPath}"
+              sh "scp -o StrictHostKeyChecking=no -i ${keyfile} -r -v docker/.env ${serverUser}@${serverIp}:${deployPath}"
+              sh "ssh -o StrictHostKeyChecking=no -i ${keyfile} ${serverUser}@${serverIp} \"cd ${deployPath} && sudo docker-compose down\""
+              sh "ssh -o StrictHostKeyChecking=no -i ${keyfile} ${serverUser}@${serverIp} \"sudo docker login -u ${dockerUser} -p ${dockerPass}\""
+              sh "ssh -o StrictHostKeyChecking=no -i ${keyfile} ${serverUser}@${serverIp} \"cd ${deployPath} && sudo sed -i 's/agiletechvietnam\\/estoryc-admin:latest/agiletechvietnam\\/estoryc-admin:$BRANCH_NAME.$BUILD_NUMBER/g' .env\""
+              sh "ssh -o StrictHostKeyChecking=no -i ${keyfile} ${serverUser}@${serverIp} \"cd ${deployPath} && sudo docker-compose build --pull && sudo docker-compose up -d\""
+            }
+          }
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      mattermostSend(color: 'good', icon: 'https://jenkins.io/images/logos/jenkins/jenkins.png', message: "Build web admin branch: $BRANCH_NAME succeed", channel: 'jenkins')
+    }
+    failure {
+      mattermostSend(color: 'danger', icon: 'https://jenkins.io/images/logos/jenkins/jenkins.png', message: "Build web admin branch: $BRANCH_NAME failed", channel: 'jenkins')
+    }
+    aborted {
+      mattermostSend(color: 'danger', icon: 'https://jenkins.io/images/logos/jenkins/jenkins.png', message: "Build web admin branch: $BRANCH_NAME aborted", channel: 'jenkins')
+    }
+    fixed {
+      mattermostSend(color: 'good', icon: 'https://jenkins.io/images/logos/jenkins/jenkins.png', message: "Build web admin branch: $BRANCH_NAME fixed", channel: 'jenkins')
+    }
+  }
+}

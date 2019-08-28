@@ -1,0 +1,40 @@
+.container {
+  background: transparent;
+  color: @content-background-color;
+
+  :global {
+    .ant-select-selection {
+      background: transparent;
+
+      border: solid 1px @mark-light-color;
+      outline: none;
+      box-shadow: none;
+      border-radius: 5px;
+      position: relative;
+      height: 40px;
+    }
+
+    .ant-select-selection__rendered {
+      line-height: 40px;
+    }
+
+    .ant-select-arrow {
+      text-indent: -1000vh;
+
+      &:before {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        margin-top: -5px;
+        display: inline-block;
+        width: 1px;
+        height: 1px;
+        content: '.';
+        color: transparent;
+
+        border: solid 5px @mark-light-color;
+        border-color: @mark-light-color transparent transparent transparent;
+      }
+    }
+  }
+}

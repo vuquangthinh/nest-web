@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "agiletechvn/story-viewer/*": ["./src/components/StoryViewer/*"],
+      "@/*": ["./src/*"],
+    }
+  }
+}

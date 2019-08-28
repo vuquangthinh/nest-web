@@ -1,0 +1,56 @@
+@import '~antd/lib/style/themes/default.less';
+
+.standardTable {
+  :global {
+    .ant-table {
+      color: #3f476b !important;
+
+      td, th {
+        white-space: nowrap;
+      }
+    }
+    .ant-table-scroll  {
+      .ant-table-body {
+        overflow-x: auto!important;
+      }
+      .ant-table-fixed {
+        max-width: 100vw;
+      }
+      .ant-table-column-title {
+        color: #3f476b !important;
+      }
+    }
+
+    .ant-table-pagination {
+      margin-top: 24px;
+    }
+    .ant-table-column-sorters {
+      display: flex!important;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: center;
+    }
+    .ant-table-thead > tr {
+      > th {
+        background: @thead-background-color;
+      }
+
+      & > th .ant-table-column-sorter .ant-table-column-sorter-inner-full {
+        margin-top: -.4em;
+        margin-right: .5em;
+        margin-left: 0;
+      }
+    }
+    .ant-table-content {
+      background: #fff;
+    }
+    .ant-table-tbody {
+      > tr:nth-child(2n+1) {
+        background-color: @row-even-bg-color;
+      }
+      > tr:nth-child(2n) {
+        background-color: @row-odd-bg-color;
+      }
+    }
+  }
+}

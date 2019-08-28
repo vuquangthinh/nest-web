@@ -1,0 +1,111 @@
+@import '~antd/lib/style/themes/default.less';
+
+.login {
+  font-size: 20px;
+  color: @strong-color;
+  line-height: 24px;
+  margin-bottom: 30px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.logoContainer {
+  margin-bottom: 28px;
+  margin-top: 25px;
+}
+
+.main {
+  width: 500px;
+  min-height: 545px;
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.16);
+
+  margin: 0 auto;
+  @media screen and (max-width: @screen-sm) {
+    width: 95%;
+  }
+
+  .icon {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.2);
+    margin-left: 16px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: @primary-color;
+    }
+  }
+
+  .other {
+    text-align: center;
+    margin-top: 20px;
+    line-height: 22px;
+
+    color: @mark-light-color;
+
+    a {
+      color: inherit;
+    }
+
+    span {
+      color: @strong-color;
+      font-weight: bold;
+    }
+  }
+
+  :global {
+    .ant-input {
+      border-radius: 5px;
+      height: 40px;
+    }
+  }
+}
+
+.mainHeader {
+  text-align: center;
+  margin-bottom: 60px;
+  margin-top: 20px;
+
+  h2 {
+    color: @mark-color;
+    line-height: 35px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+}
+.mainHeaderDescription {
+  color: @mark-light-color;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 300;
+}
+
+.resetTitle {
+  color: @strong-color;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 24px;
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.resetDesc {
+  color: @mark-color;
+  font-size: 14px;
+  text-align: center;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+
+
+.resend {
+  text-align: center;
+  color: @mark-light-color;
+  margin-top: 30px;
+}
+.resendLink {
+  color: @mark-color;
+  font-weight: 500;
+}

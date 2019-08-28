@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 -5px;
+}
+
+.input {
+  padding: 0 5px;
+
+  :global {
+    .ant-calendar-picker-input {
+      border: solid 1px @mark-light-color;
+      padding: 10px;
+    }
+    .ant-calendar-picker-clear {
+      background: transparent;
+      color: @content-background-color;
+    }
+  }
+}
+
+.caret {
+  font-size: 15px;
+  margin-top: -9px;
+  color: @mark-light-color;
+}
