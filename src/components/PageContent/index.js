@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './styles.less';
+import styles from './index.less';
 
 
 export default function PageContent({ children }) {

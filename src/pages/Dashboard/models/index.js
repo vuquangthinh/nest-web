@@ -8,38 +8,38 @@ export default {
   },
 
   effects: {
-    init() {
-      // check permissions
-      const authority = getAuthority();
+    // init() {
+    //   // check permissions
+    //   const authority = getAuthority();
 
-      if (authority.includes('admin')) {
-        router.push('/stories');
-        return;
-      }
+    //   if (authority.includes('admin')) {
+    //     router.push('/stories');
+    //     return;
+    //   }
 
-      if (authority.includes('super')) {
-        router.push('/stories');
-        return;
-      }
+    //   if (authority.includes('super')) {
+    //     router.push('/stories');
+    //     return;
+    //   }
 
-      if (authority.includes('publisher')) {
-        router.push('/studio/stories');
-      }
-    }
+    //   if (authority.includes('publisher')) {
+    //     router.push('/studio/stories');
+    //   }
+    // }
   },
 
   reducers: {
   },
 
   subscriptions: {
-    setUp({ history, dispatch }) {
-      return history.listen((location) => {
-        if (location.pathname === '/') {
-          dispatch({
-            type: 'init'
-          });
-        }
-      });
-    }
+    // setUp({ history, dispatch }) {
+    //   return history.listen((location) => {
+    //     if (location.pathname === '/') {
+    //       dispatch({
+    //         type: 'init'
+    //       });
+    //     }
+    //   });
+    // }
   }
 };

@@ -3,8 +3,14 @@ import { Spin } from 'antd';
 
 export default function Dashboard() {
   return (
-    <Fragment>
+    <div style={{
+      width: '100%',
+      height: 'calc(100vh - 100px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
       <Spin />
-    </Fragment>
-  )
+    </div>
+  );
 }

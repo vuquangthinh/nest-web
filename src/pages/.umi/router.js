@@ -223,20 +223,6 @@ const routes = [
         exact: true,
       },
       {
-        name: 'finance',
-        icon: 'fas::credit-card',
-        path: '/finances',
-        component: __IS_BROWSER
-          ? _dvaDynamic({
-              component: () => import('../Finance'),
-              LoadingComponent: require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/components/PageLoading/index')
-                .default,
-            })
-          : require('../Finance').default,
-        authority: ['admin'],
-        exact: true,
-      },
-      {
         component: __IS_BROWSER
           ? _dvaDynamic({
               component: () => import('../404'),

@@ -90,17 +90,17 @@ export default class StandardTable extends PureComponent {
           ref={this.tableRef}
           rowKey={rowKey}
           dataSource={list}
-          pagination={false}
+          pagination={paginationProps}
           {...rest}
           columns={this.getColumns()}
           onChange={this.handleTableChange}
           scroll={{ x: '100%' }}
         />
-        <Pagination
+        {/* <Pagination
           {...paginationProps}
           resource={resource}
           onChange={current => this.handleTableChange({ ...pagination, current }, filters, sorter)}
-        />
+        /> */}
       </div>
     );
   }

@@ -57,7 +57,7 @@
   display: flex;
   align-items: center;
 
-  margin: 28px;
+  margin-top: 20px;
   justify-content: flex-end;
 }
 
@@ -73,9 +73,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
-  margin: 28px;
-
   padding-bottom: 15px;
   border-bottom: solid 2px @border-content-color;
 }
@@ -113,8 +110,7 @@
 .antd-pro-components-ae-drawer-index-content {
   display: flex;
   flex: 1;
-  overflow: auto;
-  padding: 0 30px;
+  padding: 20px 0;
 }
 
 /* 
@@ -922,10 +918,10 @@
   Convert to from  src/components/FilterForm/index.less
  */
 .antd-pro-components-filter-form-index-container {
-  background: @mark-color;
+  background: @strong-color;
   padding: 10px 20px;
 
-  color: @content-background-color;
+  color: #fff;
   .ant-form-item-label > label {
     color: @content-background-color;
     font-weight: normal;
@@ -1657,9 +1653,9 @@ i.antd-pro-components-global-header-index-trigger {
 }
 
 /* 
-  Convert to from  src/components/PageContent/styles.less
+  Convert to from  src/components/PageContent/index.less
  */
-.antd-pro-components-page-content-styles-container {
+.antd-pro-components-page-content-index-container {
   max-width: 1440px;
   margin: 60px auto;
 }
@@ -3788,7 +3784,7 @@ i.antd-pro-components-global-header-index-trigger {
   }
 
   .ant-table-pagination {
-    margin-top: 24px;
+    margin-top: 15px;
   }
   .ant-table-column-sorters {
     display: flex !important;
@@ -3797,10 +3793,6 @@ i.antd-pro-components-global-header-index-trigger {
     justify-content: center;
   }
   .ant-table-thead > tr {
-    > th {
-      background: @thead-background-color;
-    }
-
     & > th .ant-table-column-sorter .ant-table-column-sorter-inner-full {
       margin-top: -0.4em;
       margin-right: 0.5em;

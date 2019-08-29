@@ -72,13 +72,6 @@ export default [
       },
 
       {
-        name: 'finance',
-        icon: 'fas::credit-card',
-        path: '/finances',
-        component: './Finance',
-        authority: ['admin'],
-      },
-      {
         component: '404',
       },
     ],

@@ -51,8 +51,8 @@ const plugins = [
 export default {
   // add for transfer to umi
   plugins,
-  base: process.env.APP_BASE || '/admin/',
-  publicPath: process.env.APP_BASE || '/admin/',
+  // base: process.env.APP_BASE || '/admin/',
+  // publicPath: process.env.APP_BASE || '/admin/',
   targets: {
     ie: 11,
   },
