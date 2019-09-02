@@ -21,10 +21,8 @@ export function _onCreate() {
   });
   
   app.model({ namespace: 'constant', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/constant.js').default) });
-app.model({ namespace: 'defaults', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/defaults.js').default) });
 app.model({ namespace: 'global', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/global.js').default) });
 app.model({ namespace: 'identity', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/identity.js').default) });
-app.model({ namespace: 'interaction', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/interaction.js').default) });
 app.model({ namespace: 'login', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/login.js').default) });
 app.model({ namespace: 'menu', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/menu.js').default) });
 app.model({ namespace: 'setting', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/setting.js').default) });

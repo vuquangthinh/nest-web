@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Table } from 'antd';
-import SimplePagination from '@/components/SimplePagination';
 import styles from './index.less';
 
 export default class StandardTable extends PureComponent {
   static defaultProps = {
     rowKey: r => r.id,
-    Pagination: SimplePagination,
   };
 
   state = {
@@ -50,7 +48,7 @@ export default class StandardTable extends PureComponent {
         if (sorted) return column;
 
         // eslint-disable-next-line eqeqeq
-        if (query[`sorts.${column.dataIndex}`]=='1' || query[`sorts.${column.dataIndex}`] == '-1') {
+        if (query[`sorts.${column.dataIndex}`] == '1' || query[`sorts.${column.dataIndex}`] == '-1') {
           sorted = true;
           return {
             ...column,
@@ -96,11 +94,6 @@ export default class StandardTable extends PureComponent {
           onChange={this.handleTableChange}
           scroll={{ x: '100%' }}
         />
-        {/* <Pagination
-          {...paginationProps}
-          resource={resource}
-          onChange={current => this.handleTableChange({ ...pagination, current }, filters, sorter)}
-        /> */}
       </div>
     );
   }

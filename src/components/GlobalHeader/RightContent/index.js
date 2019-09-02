@@ -87,8 +87,8 @@ export default class GlobalHeaderRight extends PureComponent {
             <span className={`${styles.action} ${styles.account}`}>
               <Avatar size="default" className={styles.avatar} src={identity.avatar} alt="avatar" />
               <div className={styles.nameContainer}>
-                <span className={styles.name}>{identity.username || identity.id}</span>
-                <span className={styles.nameNote}>{identity.username || identity.id}</span>
+                <span className={styles.name}>{[identity.firstName, identity.lastName].join(' ')}</span>
+                {/* <span className={styles.nameNote}>{identity.fullname || identity.id}</span> */}
               </div>
             </span>
           </Dropdown>

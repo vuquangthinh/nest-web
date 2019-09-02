@@ -63,15 +63,15 @@ const tk = new TokenManagement({
       return;
     }
 
-    invokeRequest('post', '/auth/refresh', {
-      refresh_token: refreshToken,
+    invokeRequest('post', '/auth/token', {
+      refreshToken,
     })
       .then(result => {
         if (result.success) {
-          const { access_token, refresh_token } = result.data;
-          setAccessToken(access_token);
-          setRefreshToken(refresh_token);
-          done(access_token);
+          const { accessToken, refreshToken } = result.data;
+          setAccessToken(accessToken);
+          setRefreshToken(refreshToken);
+          done(accessToken);
           return;
         }
 
@@ -119,12 +119,12 @@ export async function privateRequest(path, options, showErrorNotification = true
 }
 
 export async function saveTokens(response) {
-  const { access_token, refresh_token } = response.data;
-  setAccessToken(access_token);
-  setRefreshToken(refresh_token);
+  const { accessToken, refreshToken } = response.data;
+  setAccessToken(accessToken);
+  setRefreshToken(refreshToken);
 
   // decode jwt
-  const payload = jwtDecode(access_token);
+  const payload = jwtDecode(accessToken);
 
   // eslint-disable-next-line
   console.log('set token is done, update roles', payload);
@@ -132,8 +132,8 @@ export async function saveTokens(response) {
   const permissions = new Set();
   permissions.add('@');
 
-  if (payload.permissions) {
-    payload.permissions.forEach(perm => {
+  if (payload.roles) {
+    payload.roles.forEach(perm => {
       permissions.add(perm);
     });
   }
@@ -168,7 +168,7 @@ export async function logout() {
       await request('/auth/logout', {
         method: 'POST',
         body: {
-          refresh_token: getRefreshToken(),
+          refreshToken: getRefreshToken(),
         },
       });
     } catch (e) {

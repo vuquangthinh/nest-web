@@ -16,10 +16,6 @@ export default {
           type: 'save',
           payload: response.data,
         });
-
-        yield put({
-          type: 'defaults/update',
-        });
       }
     },
 

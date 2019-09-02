@@ -333,12 +333,12 @@ export default {
   'common.confirmation.changePasswordSuccess.smsMessage': 'Sms have been sent. Please check your phone!',
   'common.notification.changePasswordFailure.message': 'Failed to send new password!',
 
-  'common.changePassword.passwordIncorrect':'Password incorrect',
-  'common.changePassword.validateOld':'Old password is required',
-  'common.changePassword.validateNew':'New password is required',
-  'common.changePassword.validateConfirm':'Please confirm password',
-  'common.changePassword.changeSuccess':'Change password success',
-  'common.changePassword.changeError':'Error: please try again',
+  'common.changePassword.passwordIncorrect': 'Password incorrect',
+  'common.changePassword.validateOld': 'Old password is required',
+  'common.changePassword.validateNew': 'New password is required',
+  'common.changePassword.validateConfirm': 'Please confirm password',
+  'common.changePassword.changeSuccess': 'Change password success',
+  'common.changePassword.changeError': 'Error: please try again',
 
 
   'common.selection.default.select': 'Select',
@@ -497,6 +497,86 @@ export default {
   'module.user.validate.atLeastSix.username': 'Username have at least six characters',
   'module.user.validate.format.email': 'The input is not valid E-mail!',
   'module.user.validate.required.email': 'Please input your E-mail!',
+
+  'module.catalog.view.drawerTitle': 'View Library',
+
+  'module.catalog.update.drawerTitle': 'Edit Library',
+  'module.catalog.create.drawerTitle': 'Create Library',
+  'module.catalog.search.query': 'Search for name, a company...',
+  'module.catalog.pageTitle': 'Libraries',
+
+  // #endregion
+
+
+  // #region LOCATION
+  'menu.location': 'Locations',
+  'menu.setting.location': 'Locations',
+  'module.location.search.query': 'Search for a name, a email...',
+  'module.location.pageTitle': 'Locations',
+  'module.location.model.firstName': 'First name',
+  'module.location.model.lastName': 'Last name',
+  'module.location.model.locationname': 'Username',
+  'module.location.model.email': 'E-mail (primary)',
+  'module.location.model.phone': 'Phone',
+  'module.location.model.company': 'Company',
+  'module.location.model.createdAt': 'Creation date',
+  'module.location.model.status': 'Status',
+  'module.location.model.type': 'Type',
+  'module.location.model.role': 'Role',
+  'module.location.pagination.resource': 'users',
+
+  'module.location.filter.name.label': 'Name and username',
+  'module.location.filter.name.placeholder': 'Enter username, first name or last name',
+  'module.location.filter.email.label': 'E-mail',
+  'module.location.filter.email.placeholder': 'Enter email',
+  'module.location.filter.phone.label': 'Phone number',
+  'module.location.filter.phone.placeholder': 'Enter phone number',
+  'module.location.filter.createdOn.label': 'Created on',
+  'module.location.filter.status.label': 'Status',
+  'module.location.filter.type.label': 'Type',
+  'module.location.filter.role.label': 'Role',
+
+  'module.location.update.headerID': 'User ID',
+  'module.location.update.locationname': 'User name',
+  'module.location.update.status': 'Status',
+  'module.location.update.type': 'Type',
+  'module.location.update.language': 'Language',
+  'module.location.update.avatar': 'Profile picture',
+  'module.location.update.firstName': 'First name',
+  'module.location.update.lastName': 'Last name',
+  'module.location.update.email': 'Email (primary)',
+  'module.location.update.secondaryEmail': 'Email (secondary)',
+  'module.location.update.phone': 'Phone number',
+  'module.location.update.company': 'Company',
+  'module.location.update.role': 'Role',
+  'module.location.update.dateOfBirth': 'Date of birth',
+  'module.location.update.over18': 'Over 18',
+  'module.location.update.drawerTitle': 'Edit User',
+
+  'module.location.create.drawerTitle': 'Create User',
+  'module.location.create.locationname': 'User name',
+  'module.location.create.password': 'Password',
+  'module.location.create.status': 'Status',
+  'module.location.create.type': 'Type',
+  'module.location.create.language': 'Language',
+  'module.location.create.avatar': 'Profile picture',
+  'module.location.create.firstName': 'First name',
+  'module.location.create.lastName': 'Last name',
+  'module.location.create.email': 'Email (primary)',
+  'module.location.create.secondaryEmail': 'Email (secondary)',
+  'module.location.create.phone': 'Phone number',
+  'module.location.create.company': 'Company',
+  'module.location.create.role': 'Role',
+  'module.location.create.dateOfBirth': 'Date of birth',
+  'module.location.create.over18': 'Over 18',
+
+  'module.location.validate.format.phone': 'The input is not valid phone number!',
+  'module.location.validate.required.phone': 'Please input your phone number!',
+  'module.location.validate.required.locationname': 'Please input your username',
+  'module.location.validate.withoutSpace.locationname': `Username can't start, end with white-space`,
+  'module.location.validate.atLeastSix.locationname': 'Username have at least six characters',
+  'module.location.validate.format.email': 'The input is not valid E-mail!',
+  'module.location.validate.required.email': 'Please input your E-mail!',
 
   'module.catalog.view.drawerTitle': 'View Library',
 
@@ -883,64 +963,6 @@ export default {
   'module.category.validate.withoutSpace.alias': `Ailas don't have space`,
   // #endregion
 
-  // #region Studio
-  'menu.studio': 'Studio',
-  'module.studio.pageTitle': 'Studio',
-
-  'module.studio.assets.upload': 'Upload',
-
-  'module.studio.toolbar.title.placeholder': 'Please insert story title here ...',
-  'module.studio.toolbar.lastUpdatedAt': 'Updated on {time}',
-  'module.studio.toolbar.updating': 'Updating ...',
-  'module.studio.toolbar.unSave': 'Unsave',
-
-  'module.studio.statusBar.status.title': 'Status :',
-  'module.studio.statusBar.status.saved': 'Saved',
-  'module.studio.statusBar.status.saving': 'Saving...',
-  'module.studio.statusBar.status.unsave': 'Unsave',
-  'module.studio.statusBar.orientation.title': 'Orientation :',
-  'module.studio.statusBar.orientation.portrait': 'Portrait',
-  'module.studio.statusBar.orientation.landscape': 'Landscape',
-  'module.studio.statusBar.actions.newslide': 'New slide',
-  'module.studio.statusBar.actions.arrange': 'Arrange',
-  'module.studio.statusBar.actions.duplicate': 'Duplicate',
-  'module.studio.toolbar.actions.preview': 'Preview',
-  'module.studio.toolbar.actions.publish': 'Publish story',
-
-  'module.studio.toolbar.tabs.templates.title': 'Templates',
-  'module.studio.toolbar.tabs.text.title': 'Text',
-  'module.studio.toolbar.tabs.interactions.title': 'Interactions',
-  'module.studio.toolbar.tabs.interactions.addDirectMessage': 'Direct Message',
-  'module.studio.toolbar.tabs.interactions.addComment': 'Comments',
-  'module.studio.toolbar.tabs.interactions.addVote': 'Vote',
-  'module.studio.toolbar.tabs.interactions.addPoll': 'Poll',
-  'module.studio.toolbar.tabs.interactions.addArticle': 'Article',
-  'module.studio.toolbar.tabs.extras.title': 'Extras',
-  'module.studio.toolbar.tabs.filters.title': 'Filters',
-
-
-
-
-  'module.studio.assets.tabs.picture.title': 'Pictures',
-  'module.studio.assets.tabs.video.title': 'Videos',
-  'module.studio.assets.tabs.gif.title': 'GIFs',
-  'module.studio.assets.noImageUpload': 'Nothing to see here',
-  'module.studio.assets.dragAndDropInThisWindow': 'Drag and drop files in this window or ...',
-  'module.studio.assets.uploadAction': 'Browse your device',
-
-
-  'module.studio.assets.uploadAssetFile': 'Upload file success',
-
-  'module.studio.features.poll.settings.themes.title': 'Themes',
-  'module.studio.features.poll.settings.headerBackgroundColor.title': 'Header Background Color',
-  'module.studio.features.poll.settings.headerTextColor.title': 'Header Text Color',
-  'module.studio.features.poll.settings.bodyBackgroundColor.title': 'Body Background Color',
-  'module.studio.features.poll.settings.bodyTextColor.title': 'Body Text Color',
-
-  'module.studio.features.content.title.placeholder': 'INSERT ARTICLE TITLE HERE',
-  'module.studio.features.content.author.placeholder': 'Author',
-
-  // #endregion
 
   // #region ANALYTICS
   'menu.analytics': 'Analytics',
@@ -952,7 +974,7 @@ export default {
   'module.finance.pageTitle': 'Finance',
   // #endregion
 
-   // #region LANGUAGE
+  // #region LANGUAGE
   'menu.language': 'Languages',
   'menu.setting.language': 'Languages',
   'module.languages.pageTitle': 'Languages',
@@ -974,48 +996,6 @@ export default {
 
   'module.language.create.drawerTitle': 'Create Language',
 
-
-  // #region CRAWLER
-  'menu.setting.crawler': 'Crawlers',
-  'module.crawler.pageTitle': 'Crawlers',
-  'module.crawler.create.drawerTitle': 'Create crawler',
-  'module.crawler.update.drawerTitle': 'Update crawler',
-  'module.crawler.search.query': 'Search for a crawler',
-  'module.crawler.pagination.resource': 'crawlers',
-
-  'module.crawler.update.name': 'Name',
-  'module.crawler.update.domain': 'Domain',
-  'module.crawler.update.homepage': 'Homepage',
-  'module.crawler.update.numberOfMainColumn': 'Main Column',
-  'module.crawler.update.numberOfMainLine': 'Main Line',
-  'module.crawler.update.maxSequence': 'Max sequence',
-  'module.crawler.update.frequencyValue': 'Frequency Value',
-  'module.crawler.update.frequency': 'Frequency',
-  'module.crawler.update.frequencyType': 'Frequency Type',
-  'module.crawler.update.status': 'Status',
-  'module.crawler.update.includeRightColumn': 'Include Right Column',
-
-  'module.crawler.model.name': 'Name',
-  'module.crawler.model.domain': 'Domain',
-  'module.crawler.model.homepage': 'Homepage',
-  'module.crawler.model.numberOfMainColumn': 'Main Column',
-  'module.crawler.model.numberOfMainLine': 'Main Line',
-  'module.crawler.model.maxSequence': 'Max sequence',
-  'module.crawler.model.frequencyValue': 'Frequency Value',
-  'module.crawler.model.frequencyType': 'Frequency Type',
-  'module.crawler.model.status': 'Status',
-  'module.crawler.model.id': 'Id',
-
-  'module.crawler.validate.required.name': 'Name is required',
-  'module.crawler.validate.required.domain': 'Domain is required',
-  'module.crawler.validate.required.homepage': 'Home page is required',
-  'module.crawler.validate.required.numberOfMainColumn': 'Main column is required',
-  'module.crawler.validate.required.numberOfMainLine': 'Main line is required',
-  'module.crawler.validate.required.maxSequence': 'Max sequence is required',
-  'module.crawler.validate.required.frequencyValue': 'Frequency value required',
-  'module.crawler.validate.required.frequencyType': 'Frequency type column is required',
-  // #endregion
-
   // #region COUNTRY
   'menu.country': 'Countries',
   'menu.setting.country': 'Countries',
@@ -1025,6 +1005,7 @@ export default {
 
   'module.country.model.name': 'Country name',
   'module.country.model.status': 'Status',
+  'module.country.model.code': 'Code',
   'module.country.model.id': 'ID',
 
   'module.country.filter.name.label': 'Country name',
@@ -1040,7 +1021,7 @@ export default {
 
   'module.country.validate.required.name': 'Please input your country name',
 
-   // #endregion
+  // #endregion
 
 
   // #interactions
@@ -1078,19 +1059,19 @@ export default {
 
   'module.interaction.model.receiveDailyEmail': 'Receive Daily Email',
 
-  'module.interaction.update.name' : 'Name',
-  'module.interaction.update.title' : 'Title',
-  'module.interaction.update.title.placeholder' : 'Enter address, zip code...',
-  'module.interaction.update.status' : 'Status',
-  'module.interaction.update.action' : 'Action',
-  'module.interaction.update.color' : 'Color theme',
-  'module.interaction.update.link' : 'Link',
-  'module.interaction.update.company' : 'Company',
-  'module.interaction.update.story' : 'Story',
-  'module.interaction.update.created' : 'Created',
-  'module.interaction.update.startDate' : 'Start date',
-  'module.interaction.update.endDate' : 'End date',
-  'module.interaction.update.emailReport' : 'Email reports',
+  'module.interaction.update.name': 'Name',
+  'module.interaction.update.title': 'Title',
+  'module.interaction.update.title.placeholder': 'Enter address, zip code...',
+  'module.interaction.update.status': 'Status',
+  'module.interaction.update.action': 'Action',
+  'module.interaction.update.color': 'Color theme',
+  'module.interaction.update.link': 'Link',
+  'module.interaction.update.company': 'Company',
+  'module.interaction.update.story': 'Story',
+  'module.interaction.update.created': 'Created',
+  'module.interaction.update.startDate': 'Start date',
+  'module.interaction.update.endDate': 'End date',
+  'module.interaction.update.emailReport': 'Email reports',
 
 
   'module.interaction.validate.required.name': 'Name is required',

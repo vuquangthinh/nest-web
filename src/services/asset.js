@@ -1,6 +1,6 @@
 import qs from 'qs';
 import { privateRequest } from './auth';
-import { queryPagination } from './loopback';
+import { queryPagination } from './nest';
 import { objectAsFormData, removeIfNull } from '@/utils/utils';
 
 export const selection = ({ search }) => privateRequest(`/assets?${qs.stringify({

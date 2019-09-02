@@ -9,7 +9,7 @@ import { API_URL } from '@/constants';
 
 const codeMessage = {
   200: 'OK',
-  get 201(){ return formatMessage({ id: 'request.status.201' }) },
+  get 201() { return formatMessage({ id: 'request.status.201' }) },
   get 202() { return formatMessage({ id: 'request.status.202' }) },
   204: '204',
   get 400() { return formatMessage({ id: 'request.status.400' }) },
@@ -25,68 +25,11 @@ const codeMessage = {
   504: 'Timeout',
 };
 
-const entityErrorFormatter = details => _.reduce(details, (result, item) => {
-    const newResult = { ...result };
-    if (item.code === 'required') {
-      const field = [item.path, _.get(item, 'info.missingProperty')].join('.').replace(/^\.+/, '');
-      const messages = _.get(newResult, field, []);
-      _.set(newResult, field, [
-        ...messages,
-        item.message
-      ]);
-    }
-
-    if (item.code === 'type') {
-      const field = [item.path].join('.').replace(/^\.+/, '');
-      const messages = _.get(newResult, field, []);
-      _.set(newResult, field, [
-        ...messages,
-        item.message
-      ]);
-    }
-
-    if (item.code === 'format') {
-      const field = [item.path].join('.').replace(/^\.+/, '');
-      const messages = _.get(newResult, field, []);
-      _.set(newResult, field, [
-        ...messages,
-        item.message
-      ]);
-    }
-
-    return newResult;
-  }, {})
-
-function validateFormatTranformation({error}) {
-
-  const { name } = error;
-  if (name === 'UnprocessableEntityError') {
-    const { details } = error;
-    return entityErrorFormatter(details);
-  }
-
-  if (name === 'ValidationError') {
-    return _.reduce(_.get(error, 'details.messages', {}), (result, value, key) => ({
-        ...result,
-        [key]: value
-      }), {});
-  }
-
-  if (name === 'CustomValidationError') {
-    return _.reduce(_.get(error, 'details', []), (result, value) => {
-      if (result[value.path]) {
-        result[value.path].push(value.message);
-        return result;
-      }
-
-      return {
-        ...result,
-        [value.path]: [value.message]
-      }
-    }, {});
-  }
-
-  return {}; // normalize to key => value
+function validateFormatTranformation({ message }) {
+  return message.reduce((r, m) => ({
+    ...r,
+    [m.property]: Object.keys(m.constraints).map(x => m.constraints[x])
+  }), {});
 }
 
 const checkStatus = newOptions => async response => {
@@ -134,15 +77,15 @@ export default function request(path, _option, showErrorNotification = true) {
   const url = (() => {
     const newQuery = query
       ? Object.keys(query).reduce((ret, field) => {
-          if (query[field] === undefined) {
-            return ret;
-          }
+        if (query[field] === undefined) {
+          return ret;
+        }
 
-          return {
-            ...ret,
-            [field]: query[field],
-          };
-        }, {})
+        return {
+          ...ret,
+          [field]: query[field],
+        };
+      }, {})
       : {};
     if (Object.keys(newQuery).length) {
       const concat = baseUrl.indexOf('?') > -1 || path.indexOf('?') > -1 ? '&' : '?';
@@ -195,17 +138,30 @@ export default function request(path, _option, showErrorNotification = true) {
           if (newOptions.method === 'DELETE' || response.status === 204) {
             return response.text();
           }
+
           return response.json();
         })
-        .then(data => {
-          resolve({
-            success: true,
-            code: 200,
-            data,
-          });
-        })
+        .then(data => resolve({
+          success: true,
+          code: 200,
+          data,
+        }))
         .catch(e => {
+
           const status = e.name;
+
+          // validate
+          if (status === 400) {
+            // normalize
+            resolve({
+              success: false,
+              code: status,
+              message: e.json.error || '',
+              data: validateFormatTranformation(e.json)
+            });
+
+            return;
+          }
 
           if (showErrorNotification) {
             const { response } = e;
@@ -264,19 +220,6 @@ export default function request(path, _option, showErrorNotification = true) {
           }
           if (status >= 404 && status < 422) {
             router.push('/exception/404');
-          }
-
-          // validate
-          if (status === 422) {
-            // normalize
-            resolve({
-              success: false,
-              code: status,
-              message: e.json.error.message || '',
-              data: validateFormatTranformation(e.json)
-            });
-
-            return;
           }
 
           resolve({

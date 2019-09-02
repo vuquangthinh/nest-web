@@ -37,8 +37,8 @@ class SecurityView extends Component {
 
   compareNewPassword = (rule, value, callback) => {
     const { form } = this.props;
-    if (value && value !== form.getFieldValue('new_password')) {
-      callback(formatMessage({id: 'common.changePassword.passwordIncorrect'}));
+    if (value && value !== form.getFieldValue('newPassword')) {
+      callback(formatMessage({ id: 'common.changePassword.passwordIncorrect' }));
     } else {
       callback();
     }
@@ -53,8 +53,8 @@ class SecurityView extends Component {
         <Col span={14}>
           <Form onSubmit={this.handleSubmit}>
             <FormItem {...formItemLayout} label="Current password">
-              {getFieldDecorator('old_password', {
-                rules: [{ required: true, message: formatMessage({id: 'common.changePassword.validateOld'})  }],
+              {getFieldDecorator('currentPassword', {
+                rules: [{ required: true, message: formatMessage({ id: 'common.changePassword.validateOld' }) }],
               })(
                 <Input.Password
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -64,8 +64,8 @@ class SecurityView extends Component {
             </FormItem>
 
             <FormItem {...formItemLayout} label="New password">
-              {getFieldDecorator('new_password', {
-                rules: [{ required: true, message: formatMessage({id: 'common.changePassword.validateNew'}) }],
+              {getFieldDecorator('newPassword', {
+                rules: [{ required: true, message: formatMessage({ id: 'common.changePassword.validateNew' }) }],
               })(
                 <Input.Password
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -75,11 +75,11 @@ class SecurityView extends Component {
             </FormItem>
 
             <FormItem {...formItemLayout} label="Confirm new password">
-              {getFieldDecorator('confirm_password', {
+              {getFieldDecorator('confirmPassword', {
                 rules: [
                   {
                     required: true,
-                    message: formatMessage({id: 'common.changePassword.validateConfirm'}),
+                    message: formatMessage({ id: 'common.changePassword.validateConfirm' }),
                   },
                   {
                     validator: this.compareNewPassword,

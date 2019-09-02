@@ -32,31 +32,6 @@ export default {
         // Login successfully
         if (response.success) {
           reloadAuthorized();
-          // const urlParams = new URL(window.location.href);
-          // const params = getPageQuery();
-          // let { redirect } = params;
-
-          // if (redirect) {
-
-          //   const redirectUrlParams = new URL(redirect);
-          //   if (redirectUrlParams.origin === urlParams.origin) {
-          //     redirect = redirect.substr(urlParams.origin.length);
-
-          //     if (redirect.startsWith('/#')) {
-          //       redirect = redirect.substr(2);
-          //     }
-          //   } else {
-          //     window.location.href = redirect;
-          //     return;
-          //   }
-          // }
-
-          // yield put(routerRedux.replace(redirect || '/'));
-          yield put({
-            type: 'defaults/update',
-            payload: response.decoded
-          });
-
           yield put(routerRedux.replace('/'));
         }
 
@@ -106,11 +81,6 @@ export default {
             type: 'account',
             permissions: response.permissions || [],
           },
-        });
-
-        yield put({
-          type: 'defaults/update',
-          payload: response.decoded
         });
 
         // Login successfully

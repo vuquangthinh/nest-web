@@ -74,15 +74,13 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 15px;
-  border-bottom: solid 2px @border-content-color;
+  border-bottom: solid 1px @border-content-color;
 }
 
 .antd-pro-components-ae-drawer-header-title {
   font-size: 20px;
   color: @strong-color;
   line-height: 24px;
-
-  margin-bottom: 10px;
 }
 
 // .meta {}
@@ -955,6 +953,10 @@
   justify-content: space-between;
 }
 
+.antd-pro-components-filter-header-index-content {
+  margin-bottom: 12px;
+}
+
 .antd-pro-components-filter-header-index-container {
   border-bottom: solid 1px @border-color-base;
   .ant-tabs {
@@ -1657,7 +1659,7 @@ i.antd-pro-components-global-header-index-trigger {
  */
 .antd-pro-components-page-content-index-container {
   max-width: 1440px;
-  margin: 60px auto;
+  margin: 20px;
 }
 
 /* 
@@ -1833,16 +1835,6 @@ i.antd-pro-components-global-header-index-trigger {
 /* 
   Convert to from  src/components/PageHeaderWrapper/index.less
  */
-
-.antd-pro-components-page-header-wrapper-index-content {
-  margin: 24px 24px 0;
-}
-
-@media screen and (max-width: @screen-sm) {
-  .antd-pro-components-page-header-wrapper-index-content {
-    margin: 24px 0 0;
-  }
-}
 
 /* 
   Convert to from  src/components/PhoneNumberInput/index.less
@@ -4080,8 +4072,6 @@ input[type="file"] {
 .ant-menu-dark .ant-menu-submenu,
 .ant-menu-inline .ant-menu-submenu-title {
   color: @drawer-background-color;
-  font-size: 18px;
-  line-height: 40px;
 }
 
 .ant-menu-dark .ant-menu-item:hover > a,
@@ -4269,7 +4259,7 @@ input[type="file"] {
   // }
 
   .antd-pro-pages-account-settings-base-view-right {
-    flex: 1;
+    // flex: 1;
     padding-left: 104px;
     .antd-pro-pages-account-settings-base-view-avatar_title {
       height: 22px;
@@ -4283,6 +4273,9 @@ input[type="file"] {
       width: 144px;
       text-align: center;
     }
+  }
+  .ant-form {
+    width: 100%;
   }
 }
 
@@ -4631,6 +4624,10 @@ font.weak {
     margin-bottom: 12px;
   }
 }
+
+/* 
+  Convert to from  src/pages/LocationCountry/index.less
+ */
 
 /* 
   Convert to from  src/pages/Profile/AdvancedProfile.less

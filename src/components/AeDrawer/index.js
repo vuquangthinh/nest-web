@@ -4,12 +4,13 @@ import styles from './index.less';
 
 export default function AeDrawer({ visible, onClose, children, header, footer }) {
   return (
-    <Modal destroyOnClose
+    <Modal
+      destroyOnClose
       className={styles.container}
       width={'auto'}
       closable={false}
       visible={visible}
-      onClose={onClose}
+      onCancel={onClose}
       footer={false}
     >
       {header}

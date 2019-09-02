@@ -237,14 +237,14 @@ export default class BasicLayout extends React.PureComponent {
 
     if (fixSiderbar && layout !== 'topmenu') {
       return {
-        margin: '24px 24px 0',
+        // margin: '24px 24px 0',
         paddingTop: fixedHeader ? 64 : 0,
         paddingLeft: collapsed ? '80px' : '256px',
       };
     }
 
     return {
-      margin: '24px 24px 0',
+      // margin: '24px 24px 0',
       paddingTop: fixedHeader ? 64 : 0,
     };
   };
@@ -281,14 +281,14 @@ export default class BasicLayout extends React.PureComponent {
     } = this.props;
 
     const { isMobile } = this.state;
-    // const isTop = PropsLayout === 'topmenu';
+    const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
 
     // console.log('is mobile', isMobile)
 
     const layout = (
       <Layout>
-        {/* {isTop && !isMobile ? null : (
+        {isTop && !isMobile ? null : (
           <SiderMenu
             logo={logo}
             Authorized={Authorized}
@@ -298,7 +298,7 @@ export default class BasicLayout extends React.PureComponent {
             isMobile={isMobile}
             {...this.props}
           />
-        )} */}
+        )}
         <SiderMenu
           logo={logo}
           Authorized={Authorized}

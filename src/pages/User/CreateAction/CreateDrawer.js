@@ -14,14 +14,13 @@ import model from '../models';
 import { createValidationCallback } from '@/utils/utils';
 import { getAuthority } from '@/utils/authority';
 import * as language from '@/services/language';
-import * as company from '@/services/company';
-import * as role from '@/services/role';
 
 import Selection from '@/components/Selection';
 import RemoteServiceSelect from '@/components/RemoteServiceSelect';
 import DateInput from '@/components/DateInput';
 import PictureInput from '@/components/PictureInput';
 import PhoneNumberInput from '@/components/PhoneNumberInput';
+import { create } from '@/services/user';
 // import styles from '@/pages/User/index.less';
 
 const authority = getAuthority();
@@ -29,11 +28,6 @@ const isAdmin = authority.includes('admin');
 
 const getRecord = _.memoize(state => ({
   id: '<empty>',
-  created: {
-    id: state.identity.id,
-    firstName: state.identity.firstName,
-    lastName: state.identity.lastName,
-  },
   dateOfBirth: moment('1900-01-01'),
   status: 1,
   roleId: isAdmin ? 1 : 2,
@@ -71,24 +65,22 @@ class CreateDrawer extends React.Component {
 
   handleSubmit = () => {
     const { form, dispatch, id, listUrl } = this.props;
-    form.validateFields((err, values) => {
-      if (err) {
-        if (err.phone && err.phone.expired) {
-          // ignore
-        } else {
-          return;
-        }
-      }
+    form.validateFields(async (err, values) => {
+      if (err) return;
 
       this.setState({
         submitLoading: true,
       });
-      dispatch({
-        type: `${model.namespace}/create`,
-        payload: {
-          ...values,
-          id,
-        },
+
+      const response = await create(values);
+
+      if (response.success) {
+        notification.success({
+          message: formatMessage({ id: 'common.notification.createSuccess' }),
+        });
+      }
+
+      dispatchEventInPayload(response, {
         onValidationFailure: createValidationCallback(form),
         onSuccess: () => {
           this.handleClose();
@@ -127,21 +119,6 @@ class CreateDrawer extends React.Component {
           </Actions>
         }
       >
-        <MetaDetail
-          items={[
-            {
-              label: formatMessage({ id: 'common.fields.createdBy' }),
-              value: formatMessage(
-                { id: 'common.fields.byAt' },
-                {
-                  name: `${_.toString(_.get(identity, 'username'))}`,
-                  uid: record.created.id,
-                  time: moment().format('ll'),
-                }
-              ),
-            },
-          ]}
-        />
       </Header>
     );
   }
@@ -349,56 +326,6 @@ class CreateDrawer extends React.Component {
               {getFieldDecorator('type', {
                 initialValue: record.type,
               })(<Selection type="UserType" />)}
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              className="input-row"
-              label={formatMessage({ id: 'module.user.create.company' })}
-            >
-              {getFieldDecorator('companyId', {
-                initialValue: record.companyId,
-              })(
-                <RemoteServiceSelect
-                  service={company.selectionActive}
-                  serviceOne={company.queryOne}
-                  dropdownOnEmpty
-                />
-              )}
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <Row gutter={24}>
-          <Col span={12}>
-            <Form.Item
-              className="input-row"
-              label={formatMessage({ id: 'module.user.create.role' })}
-            >
-              {getFieldDecorator('roleId', {
-                initialValue: record.roleId,
-              })(
-                <RemoteServiceSelect
-                  service={role.selection}
-                  serviceOne={role.queryOne}
-                  dropdownOnEmpty
-                />
-              )}
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              className="input-row"
-              label={formatMessage({ id: 'module.user.create.language' })}
-            >
-              {getFieldDecorator('languageId', {
-                initialValue: record.languageId,
-              })(
-                <RemoteServiceSelect
-                  service={language.selectionActive}
-                  serviceOne={language.queryOne}
-                />
-              )}
             </Form.Item>
           </Col>
         </Row>

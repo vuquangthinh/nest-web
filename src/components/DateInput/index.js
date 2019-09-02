@@ -21,7 +21,7 @@ export default class DateInput extends React.Component {
   }
 
     return (
-      <DatePicker {...props} {...valueProps} format="LL" disabled={disable} className={cls([className, styles.input])} suffixIcon={<span />} />
+      <DatePicker {...props} {...valueProps} format="l" disabled={disable} className={cls([className, styles.input])} suffixIcon={<span />} />
     );
   }
 }

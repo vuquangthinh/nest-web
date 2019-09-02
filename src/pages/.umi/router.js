@@ -219,8 +219,78 @@ const routes = [
                 .default,
             })
           : require('../User').default,
-        authority: ['super'],
+        authority: ['admin'],
         exact: true,
+      },
+      {
+        name: 'setting',
+        icon: 'fa::cogs',
+        path: '/settings',
+        authority: ['admin'],
+        routes: [
+          {
+            name: 'location',
+            icon: 'fa::globe',
+            path: '/settings/locations',
+            routes: [
+              {
+                name: 'country',
+                icon: 'fa::flag',
+                path: '/settings/locations/countries',
+                component: __IS_BROWSER
+                  ? _dvaDynamic({
+                      component: () => import('../LocationCountry'),
+                      LoadingComponent: require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/components/PageLoading/index')
+                        .default,
+                    })
+                  : require('../LocationCountry').default,
+                exact: true,
+              },
+              {
+                icon: 'fa::map-pin',
+                name: 'state',
+                path: '/settings/locations/states',
+                component: __IS_BROWSER
+                  ? _dvaDynamic({
+                      component: () => import('../LocationState'),
+                      LoadingComponent: require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/components/PageLoading/index')
+                        .default,
+                    })
+                  : require('../LocationState').default,
+                exact: true,
+              },
+              {
+                icon: 'fa::city',
+                name: 'city',
+                path: '/settings/locations/cities',
+                component: __IS_BROWSER
+                  ? _dvaDynamic({
+                      component: () => import('../LocationCity'),
+                      LoadingComponent: require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/components/PageLoading/index')
+                        .default,
+                    })
+                  : require('../LocationCity').default,
+                exact: true,
+              },
+              {
+                component: () =>
+                  React.createElement(
+                    require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
+                      .default,
+                    { pagesPath: 'src/pages', hasRoutesInConfig: true },
+                  ),
+              },
+            ],
+          },
+          {
+            component: () =>
+              React.createElement(
+                require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
+                  .default,
+                { pagesPath: 'src/pages', hasRoutesInConfig: true },
+              ),
+          },
+        ],
       },
       {
         component: __IS_BROWSER

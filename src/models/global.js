@@ -9,12 +9,12 @@ export default {
     notices: [],
 
     application: {
-      name: 'ZMOOZ',
-      headerName: 'ZMOOZ.',
+      name: 'TEAMSOFT',
+      headerName: 'TS.',
       description: 'Superadmin Dashboard',
-      copyright: 'zmooz',
+      copyright: 'teamsoft',
       year: moment().format('Y'),
-      forgotLink: 'https://agiltech.vn/forgot',
+      forgotLink: 'https://teamsoft.vn/forgot',
     },
   },
 

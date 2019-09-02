@@ -1,5 +1,6 @@
 import moment from 'moment';
 import nzh from 'nzh/cn';
+import _ from 'lodash';
 import { formatMessage } from 'umi/locale';
 import { parse, stringify } from 'qs';
 import router from 'umi/router';
@@ -162,9 +163,9 @@ export function setValidateMessage(form, errors) {
   const fieldsValue = form.getFieldsValue();
 
   const initFields = Object.keys(errors).reduce((r, field) => ({
-      ...r,
-      [field]: errors[field] ? errors[field].map(msg => new Error(msg)) : []
-    }), {});
+    ...r,
+    [field]: errors[field] ? errors[field].map(msg => new Error(msg)) : []
+  }), {});
 
 
   const updateFields = Object.keys(fieldsValue).reduce((fields, field) => {
@@ -199,13 +200,13 @@ export function dispatchEventInPayload(response, payload) {
   const { onValidationFailure, onSuccess, onFail } = payload;
   const { code, data } = response;
 
-  if (code === 422) {
+  if (code === 400) {
     if (onValidationFailure) onValidationFailure(data, response);
     if (onFail) onFail(response);
     return;
   }
 
-  if (code === 200) {
+  if (code >= 200 && code < 300) {
     if (onSuccess) onSuccess(response.data);
     return;
   }
@@ -265,7 +266,7 @@ export function getConstantTitle(items, code, defaultValue = '') {
     return defaultValue;
   }
 
-  return formatMessage({ id:  res.title });
+  return formatMessage({ id: res.title });
 }
 
 
@@ -287,12 +288,12 @@ export function removeIfNull(data) {
   }, {});
 }
 
-export const extractFilterQueryString = query => Object.keys(query).reduce((res, field) => {
+export const extractFilterQueryString = _.memoize(query => Object.keys(query).reduce((res, field) => {
   const [part, ...data] = field.split('.');
   if (!res[part]) res[part] = {};
   res[part][data.join('.')] = query[field];
   return res;
-}, {});
+}, {}));
 
 // remove all old sort
 export const clearSortParams = query => Object.keys(query).reduce((res, field) => {
@@ -314,7 +315,7 @@ export const renderEmptyIfInvalidDate = (time, format) => {
 
 export const serviceWithEmpty = service => async (...args) => {
   const result = await service(...args)
-  if(result.success) {
+  if (result.success) {
     return {
       ...result,
       data: [
@@ -329,8 +330,8 @@ export const serviceWithEmpty = service => async (...args) => {
 export const selectionWithNone = (service, currentId, noneItem = { id: 0, name: 'None' }) => async search => {
 
   if (search.search) {
-    const result = await service({...search, currentId })
-    if(result.success) {
+    const result = await service({ ...search, currentId })
+    if (result.success) {
       return {
         ...result,
         data: [
@@ -352,30 +353,30 @@ export const selectionWithNone = (service, currentId, noneItem = { id: 0, name: 
 
 
 export const createHandleStandardTableChange = ({ location }) => (pagination = { current: 1 }, filtersArg = {}, sorter = {}) => {
-    const newQuery = clearSortParams({
-      ...location.query
-    });
+  const newQuery = clearSortParams({
+    ...location.query
+  });
 
-    Object.keys(filtersArg).forEach(field => {
-      const key = `filters.${field}`;
-      newQuery[key] = filtersArg[field];
-    });
+  Object.keys(filtersArg).forEach(field => {
+    const key = `filters.${field}`;
+    newQuery[key] = filtersArg[field];
+  });
 
-    Object.keys(pagination).forEach(field => {
-      const key = `pagination.${field}`;
+  Object.keys(pagination).forEach(field => {
+    const key = `pagination.${field}`;
 
-      if (['pageSize', 'current'].includes(field)) {
-        newQuery[key] = pagination[field];
-      }
-    });
-
-    if (sorter.field) {
-      const key = `sorts.${sorter.field}`;
-      newQuery[key] = sorter.order.toLowerCase() === 'ascend' ? 1 : -1;
+    if (['pageSize', 'current'].includes(field)) {
+      newQuery[key] = pagination[field];
     }
+  });
 
-    router.push({
-      pathname: location.pathname,
-      query: newQuery,
-    });
-  };
+  if (sorter.field) {
+    const key = `sorts.${sorter.field}`;
+    newQuery[key] = sorter.order.toLowerCase() === 'ascend' ? 1 : -1;
+  }
+
+  router.push({
+    pathname: location.pathname,
+    query: newQuery,
+  });
+};

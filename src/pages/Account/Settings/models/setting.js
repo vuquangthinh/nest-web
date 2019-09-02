@@ -12,19 +12,16 @@ export default {
   effects: {
     *updatePassword({ payload, ...other }, { call }) {
       const response = yield call(changePassword, payload);
+
       if (response.success) {
         notification.success({
           message: formatMessage({id: 'common.changePassword.changeSuccess'}),
         });
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        router.push('/auth/login')
+        // localStorage.removeItem('accessToken');
+        // localStorage.removeItem('refreshToken');
+        // router.push('/auth/login')
         return;
-      } 
-
-      notification.warning({
-        message: formatMessage({id: 'common.changePassword.changeError'})
-      })
+      }
 
       dispatchEventInPayload(response, other);
     },

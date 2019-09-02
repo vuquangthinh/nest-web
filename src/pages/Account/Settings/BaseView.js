@@ -96,76 +96,71 @@ class BaseView extends Component {
     } = this.props;
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
-        {/* <div className={styles.left}>
-          <AvatarView avatar={this.getAvatarURL()} />
-        </div>
-        <div className={styles.right}> */}
-          <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.username' })}>
-              <Input readOnly disabled value={identity.username} />
-            </FormItem>
+        <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
+          <FormItem label={formatMessage({ id: 'app.settings.basic.username' })}>
+            <Input readOnly disabled value={identity.username} />
+          </FormItem>
 
-            <Row gutter={12}>
-              <Col span={12}>
-                <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
-                  {getFieldDecorator('email', {
-                    rules: [
-                      {
-                        required: false,
-                        message: formatMessage({ id: 'app.settings.basic.email-message' }, {}),
-                      },
-                    ],
-                  })(<Input />)}
-                </FormItem>
-              </Col>
-              <Col span={12}>
-                <FormItem label={formatMessage({ id: 'app.settings.basic.nickname' })}>
-                  {getFieldDecorator('name', {
-                    rules: [
-                      {
-                        required: true,
-                        message: formatMessage({ id: 'app.settings.basic.nickname-message' }, {}),
-                      },
-                    ],
-                  })(<Input />)}
-                </FormItem>
-              </Col>
-            </Row>
+          <Row gutter={12}>
+            <Col span={12}>
+              <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
+                {getFieldDecorator('email', {
+                  rules: [
+                    {
+                      required: false,
+                      message: formatMessage({ id: 'app.settings.basic.email-message' }, {}),
+                    },
+                  ],
+                })(<Input />)}
+              </FormItem>
+            </Col>
+            <Col span={12}>
+              <FormItem label={formatMessage({ id: 'app.settings.basic.nickname' })}>
+                {getFieldDecorator('name', {
+                  rules: [
+                    {
+                      required: true,
+                      message: formatMessage({ id: 'app.settings.basic.nickname-message' }, {}),
+                    },
+                  ],
+                })(<Input />)}
+              </FormItem>
+            </Col>
+          </Row>
 
-            <FormItem label={formatMessage({ id: 'app.settings.basic.profile' })}>
-              {getFieldDecorator('bio')(
-                <Input.TextArea
-                  placeholder={formatMessage({ id: 'app.settings.basic.profile-placeholder' })}
-                  rows={4}
-                />
-              )}
-            </FormItem>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.address' })}>
-              {getFieldDecorator('address', {
-                rules: [
-                  {
-                    required: false,
-                    message: formatMessage({ id: 'app.settings.basic.address-message' }, {}),
-                  },
-                ],
-              })(<Input />)}
-            </FormItem>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.phone' })}>
-              {getFieldDecorator('phone', {
-                rules: [
-                  {
-                    required: false,
-                    message: formatMessage({ id: 'app.settings.basic.phone-message' }, {}),
-                  },
-                  { validator: validatorPhone },
-                ],
-              })(<PhoneView />)}
-            </FormItem>
-            <Button type="primary" htmlType="submit">
-              <FormattedMessage id="app.settings.basic.update" defaultMessage="Update" />
-            </Button>
-          </Form>
-        {/* </div> */ }
+          <FormItem label={formatMessage({ id: 'app.settings.basic.profile' })}>
+            {getFieldDecorator('bio')(
+              <Input.TextArea
+                placeholder={formatMessage({ id: 'app.settings.basic.profile-placeholder' })}
+                rows={4}
+              />
+            )}
+          </FormItem>
+          <FormItem label={formatMessage({ id: 'app.settings.basic.address' })}>
+            {getFieldDecorator('address', {
+              rules: [
+                {
+                  required: false,
+                  message: formatMessage({ id: 'app.settings.basic.address-message' }, {}),
+                },
+              ],
+            })(<Input />)}
+          </FormItem>
+          <FormItem label={formatMessage({ id: 'app.settings.basic.phone' })}>
+            {getFieldDecorator('phone', {
+              rules: [
+                {
+                  required: false,
+                  message: formatMessage({ id: 'app.settings.basic.phone-message' }, {}),
+                },
+                { validator: validatorPhone },
+              ],
+            })(<PhoneView />)}
+          </FormItem>
+          <Button type="primary" htmlType="submit">
+            <FormattedMessage id="app.settings.basic.update" defaultMessage="Update" />
+          </Button>
+        </Form>
       </div>
     );
   }

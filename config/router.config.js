@@ -68,9 +68,41 @@ export default [
         icon: 'fa::users',
         path: '/users',
         component: './User',
-        authority: ['super'],
+        authority: ['admin'],
       },
-
+      {
+        name: 'setting',
+        icon: 'fa::cogs',
+        path: '/settings',
+        authority: ['admin'],
+        routes: [
+          {
+            name: 'location',
+            icon: 'fa::globe',
+            path: '/settings/locations',
+            routes: [
+              {
+                name: 'country',
+                icon: 'fa::flag',
+                path: '/settings/locations/countries',
+                component: './LocationCountry',
+              },
+              {
+                icon: 'fa::map-pin',
+                name: 'state',
+                path: '/settings/locations/states',
+                component: './LocationState',
+              },
+              {
+                icon: 'fa::city',
+                name: 'city',
+                path: '/settings/locations/cities',
+                component: './LocationCity',
+              }
+            ]
+          },
+        ]
+      },
       {
         component: '404',
       },

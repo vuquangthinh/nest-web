@@ -1,6 +1,6 @@
 import qs from 'qs';
 import { privateRequest } from './auth';
-import { queryPagination } from './loopback';
+import { queryPagination } from './nest';
 import { removeIfNull } from '@/utils/utils';
 import { STATUS_ACTIVE } from '@/constants';
 
@@ -31,10 +31,10 @@ export const selectionActive = ({ search }) =>
     const query = {
       ...filters,
     };
-    return queryPagination('countries', query, sorts, pagination);
+    return queryPagination('locations/countries', query, sorts, pagination);
   }
 
-  export const queryOne = ({ id }) => privateRequest(`/countries/${id}`);
+  export const queryOne = ({ id }) => privateRequest(`/locations/countries/${id}`);
 
   export const create = data =>
     privateRequest(`/countries`, {

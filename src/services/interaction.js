@@ -1,6 +1,6 @@
 import qs from 'qs';
 import { privateRequest } from './auth';
-import { queryPagination } from './loopback';
+import { queryPagination } from './nest';
 import { STATUS_ACTIVE, DISPLAY_YES } from '@/constants';
 import { objectAsFormData, removeIfNull } from '@/utils/utils';
 

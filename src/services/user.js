@@ -1,7 +1,7 @@
 import qs from 'qs';
 import toString from 'lodash';
 import { privateRequest } from './auth';
-import { queryPagination } from './loopback';
+import { queryPagination } from './nest';
 import { objectAsFormData, removeIfNull } from '@/utils/utils';
 import { STATUS_ACTIVE } from '@/constants';
 

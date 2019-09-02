@@ -358,42 +358,9 @@ class UpdateDrawerForm extends React.Component {
               })(<Selection type="UserType" />)}
             </Form.Item>
           </Col>
-          <Col span={12}>
-            <Form.Item
-              className="input-row"
-              label={formatMessage({ id: 'module.user.create.company' })}
-            >
-              {getFieldDecorator('companyId', {
-                initialValue: record.companyId,
-              })(
-                <RemoteServiceSelect
-                  service={company.selectionActive}
-                  serviceOne={company.queryOne}
-                  dropdownOnEmpty
-                />
-              )}
-            </Form.Item>
-          </Col>
         </Row>
 
         <Row gutter={24}>
-          <Col span={12}>
-            <Form.Item
-              className="input-row"
-              label={formatMessage({ id: 'module.user.update.role' })}
-            >
-              {getFieldDecorator('roleId', {
-                initialValue: record.roleId,
-              })(
-                <RemoteServiceSelect
-                  placeholder={formatMessage({ id: 'common.selection.default.none' })}
-                  service={role.selection}
-                  serviceOne={role.queryOne}
-                  dropdownOnEmpty
-                />
-              )}
-            </Form.Item>
-          </Col>
           <Col span={12}>
             <Form.Item
               className="input-row"

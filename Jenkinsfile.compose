@@ -35,7 +35,7 @@ pipeline {
         if (env.BRANCH_NAME == 'prod') {
           DOCKER_REGISTRY_URL = 'https://eu.gcr.io/glossy-essence-248121'
 
-          API_URL = 'https://api.zmooz.com'
+          API_URL = 'https://api.teamsoft.vn'
         }
       }
     }
