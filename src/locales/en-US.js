@@ -429,7 +429,7 @@ export default {
   // #endregion
 
   // #region USER
-  'menu.user': 'Users',
+  'menu.user.all': 'Users',
   'menu.setting.user': 'Users',
   'module.user.search.query': 'Search for a name, a email...',
   'module.user.pageTitle': 'Users',
@@ -507,12 +507,27 @@ export default {
 
   // #endregion
 
+  // #region ROLE
+  'menu.role': 'Role',
+  'menu.role.pageTitle': 'Role & Permissions',
+  'menu.user.role': 'Roles & Permissions',
+  'module.role.search.query': 'Search permissions',
+  'module.role.grid.permission': 'Permissions',
+
+  // #endregion
+
 
   // #region LOCATION
   'menu.location': 'Locations',
   'menu.setting.location': 'Locations',
+  'menu.setting.location.country': 'Countries',
+  'menu.setting.location.city': 'Cities',
+  'menu.setting.location.state': 'States',
   'module.location.search.query': 'Search for a name, a email...',
-  'module.location.pageTitle': 'Locations',
+  'module.location.city.pageTitle': 'Cities',
+  'module.location.country.pageTitle': 'Countries',
+  'module.location.state.pageTitle': 'States',
+  
   'module.location.model.firstName': 'First name',
   'module.location.model.lastName': 'Last name',
   'module.location.model.locationname': 'Username',

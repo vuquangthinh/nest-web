@@ -33,13 +33,11 @@ export const selection = async ({ search }) => {
   return result;
 }
 
-export const queryOne = ({ id }) => privateRequest(`/roles/${id}`);
+export const queryOne = ({ id }) => privateRequest(`/permissions/${id}`);
 
 export const queryAll = async ({ filters, sorts, pagination }) => {
   const query = {
     ...filters,
   };
-  return queryPagination('roles', query, sorts, pagination);
+  return queryPagination('permissions', query, sorts, pagination);
 }
-
-export const all = async () => privateRequest('/roles');

@@ -3,7 +3,9 @@ import history from './history';
 import '../../global.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import findRoute from '/Users/quangthinh/Documents/Teamsoft/nestapi/web/node_modules/umi-build-dev/lib/findRoute.js';
+import findRoute, {
+  getUrlQuery,
+} from '/Users/quangthinh/Documents/Teamsoft/nestapi/web/node_modules/umi-build-dev/lib/findRoute.js';
 import FastClick from '../../../node_modules/fastclick/lib/fastclick.js';
 
 // runtime plugins
@@ -61,6 +63,7 @@ let clientRender = async () => {
         ? await activeRoute.component.getInitialProps({
             route: activeRoute,
             isServer: false,
+            location,
             ...initialProps,
           })
         : {};
@@ -95,8 +98,10 @@ if (__IS_BROWSER) {
 let serverRender, ReactDOMServer;
 if (!__IS_BROWSER) {
   serverRender = async (ctx = {}) => {
-    const pathname = ctx.req.url;
-    require('@tmp/history').default.push(pathname);
+    // ctx.req.url may be `/bar?locale=en-US`
+    const [pathname] = (ctx.req.url || '').split('?');
+    const history = require('@tmp/history').default;
+    history.push(ctx.req.url);
     let props = {};
     const activeRoute =
       findRoute(require('./router').routes, pathname) || false;
@@ -108,9 +113,17 @@ if (!__IS_BROWSER) {
       const initialProps = plugins.apply('modifyInitialProps', {
         initialValue: {},
       });
+      // patch query object
+      const location = history.location
+        ? { ...history.location, query: getUrlQuery(history.location.search) }
+        : {};
       props = await activeRoute.component.getInitialProps({
         route: activeRoute,
         isServer: true,
+        location,
+        // only exist in server
+        req: ctx.req || {},
+        res: ctx.res || {},
         ...initialProps,
       });
       props = plugins.apply('initialProps', {

@@ -4081,8 +4081,10 @@ input[type="file"] {
 }
 
 .ant-menu.ant-menu-dark .ant-menu-item-selected,
+.ant-menu.ant-menu-dark .ant-menu-submenu-selected,
 .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
   background-color: transparent;
+  color: @primary-color;
 }
 
 .ant-menu-dark {
@@ -4612,6 +4614,36 @@ font.weak {
 .antd-pro-pages-auth-reset-password-index-resendLink {
   color: @mark-color;
   font-weight: 500;
+}
+
+/* 
+  Convert to from  src/pages/Dashboard/index.less
+ */
+
+.antd-pro-pages-dashboard-index-bgimg {
+  /* Background image */
+  background-image: url("../../assets/cool-background.png") !important;
+  /* Full-screen */
+  height: 100%;
+  /* Center the background image */
+  background-position: center;
+  /* Scale and zoom in the image */
+  background-size: cover;
+  /* Add a white text color to all elements inside the .bgimg container */
+  color: white;
+  /* Add a font */
+  font-family: "Courier New", Courier, monospace;
+  /* Set the font-size to 25 pixels */
+  font-size: 25px;
+}
+
+/* Position text in the middle */
+.antd-pro-pages-dashboard-index-middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 /* 

@@ -94,14 +94,6 @@ const routes = [
         hideInMenu: true,
         component: __IS_BROWSER
           ? _dvaDynamic({
-              app: require('@tmp/dva').getApp(),
-              models: () => [
-                import('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/pages/Dashboard/models/index.js').then(
-                  m => {
-                    return { namespace: 'index', ...m.default };
-                  },
-                ),
-              ],
               component: () => import('../Dashboard'),
               LoadingComponent: require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/components/PageLoading/index')
                 .default,
@@ -204,23 +196,62 @@ const routes = [
         name: 'user',
         icon: 'fa::users',
         path: '/users',
-        component: __IS_BROWSER
-          ? _dvaDynamic({
-              app: require('@tmp/dva').getApp(),
-              models: () => [
-                import('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/pages/User/models/index.js').then(
-                  m => {
-                    return { namespace: 'index', ...m.default };
-                  },
-                ),
-              ],
-              component: () => import('../User'),
-              LoadingComponent: require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/components/PageLoading/index')
-                .default,
-            })
-          : require('../User').default,
         authority: ['admin'],
-        exact: true,
+        routes: [
+          {
+            icon: 'fa::users',
+            name: 'all',
+            path: '/users/all',
+            component: __IS_BROWSER
+              ? _dvaDynamic({
+                  app: require('@tmp/dva').getApp(),
+                  models: () => [
+                    import('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/pages/User/models/index.js').then(
+                      m => {
+                        return { namespace: 'index', ...m.default };
+                      },
+                    ),
+                  ],
+                  component: () => import('../User'),
+                  LoadingComponent: require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/components/PageLoading/index')
+                    .default,
+                })
+              : require('../User').default,
+            exact: true,
+          },
+          {
+            icon: 'fa::unlock',
+            name: 'role',
+            path: '/users/roles',
+            component: __IS_BROWSER
+              ? _dvaDynamic({
+                  component: () => import('../Role'),
+                  LoadingComponent: require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/components/PageLoading/index')
+                    .default,
+                })
+              : require('../Role').default,
+            exact: true,
+          },
+          {
+            path: '/users/:id',
+            component: __IS_BROWSER
+              ? _dvaDynamic({
+                  component: () => import('../UserDetail'),
+                  LoadingComponent: require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/components/PageLoading/index')
+                    .default,
+                })
+              : require('../UserDetail').default,
+            exact: true,
+          },
+          {
+            component: () =>
+              React.createElement(
+                require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
+                  .default,
+                { pagesPath: 'src/pages', hasRoutesInConfig: true },
+              ),
+          },
+        ],
       },
       {
         name: 'setting',
@@ -228,6 +259,19 @@ const routes = [
         path: '/settings',
         authority: ['admin'],
         routes: [
+          {
+            name: 'country',
+            icon: 'fa::flag',
+            path: '/settings/locations/halo',
+            component: __IS_BROWSER
+              ? _dvaDynamic({
+                  component: () => import('../LocationCountry'),
+                  LoadingComponent: require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/components/PageLoading/index')
+                    .default,
+                })
+              : require('../LocationCountry').default,
+            exact: true,
+          },
           {
             name: 'location',
             icon: 'fa::globe',

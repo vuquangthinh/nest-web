@@ -1,16 +1,15 @@
-import React, { Fragment } from 'react';
-import { Spin } from 'antd';
+import React, { Component } from 'react';
+import styles from './index.less';
 
-export default function Dashboard() {
-  return (
-    <div style={{
-      width: '100%',
-      height: 'calc(100vh - 100px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <Spin />
-    </div>
-  );
+// eslint-disable-next-line react/prefer-stateless-function
+export default class Analytics extends Component {
+  render() {
+    return (
+      <div className={styles.bgimg}>
+        <div className={styles.middle}>
+          <h1>COMING SOON</h1>
+        </div>
+      </div>
+    )
+  }
 }

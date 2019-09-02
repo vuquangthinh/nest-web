@@ -40,7 +40,7 @@ function LocationCountry({ location }) {
   const [filterQuery, handleQuery] = useQuery(null, handleQueryChange);
 
   return (
-    <PageHeaderWrapper title={formatMessage({ id: 'module.user.pageTitle' })}>
+    <PageHeaderWrapper title={formatMessage({ id: 'module.location.city.pageTitle' })}>
       <PageContent>
         <FilterHeader>
           <Search

@@ -22,7 +22,6 @@ export default [
         name: 'dashboard',
         icon: 'dashboard',
         hideInMenu: true,
-        // redirect: '/users'
         component: './Dashboard',
         authority: ['@'],
       },
@@ -67,15 +66,39 @@ export default [
         name: 'user',
         icon: 'fa::users',
         path: '/users',
-        component: './User',
         authority: ['admin'],
+        routes: [
+          {
+            icon: 'fa::users',
+            name: 'all',
+            path: '/users/all',
+            component: './User',
+          },
+          {
+            icon: 'fa::unlock',
+            name: 'role',
+            path: '/users/roles',
+            component: './Role',
+          },
+          {
+            path: '/users/:id',
+            component: './UserDetail',
+          },
+        ]
       },
+
       {
         name: 'setting',
         icon: 'fa::cogs',
         path: '/settings',
         authority: ['admin'],
         routes: [
+          {
+            name: 'country',
+            icon: 'fa::flag',
+            path: '/settings/locations/halo',
+            component: './LocationCountry',
+          },
           {
             name: 'location',
             icon: 'fa::globe',
