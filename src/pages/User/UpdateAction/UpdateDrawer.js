@@ -28,7 +28,6 @@ import { createValidationCallback } from '@/utils/utils';
 
 import { queryOne } from '@/services/user';
 import * as language from '@/services/language';
-import * as company from '@/services/company';
 import * as role from '@/services/role';
 
 import Selection from '@/components/Selection';

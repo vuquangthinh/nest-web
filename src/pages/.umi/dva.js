@@ -26,7 +26,6 @@ app.model({ namespace: 'identity', ...(require('/Users/quangthinh/Documents/Team
 app.model({ namespace: 'login', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/login.js').default) });
 app.model({ namespace: 'menu', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/menu.js').default) });
 app.model({ namespace: 'setting', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/setting.js').default) });
-app.model({ namespace: 'story', ...(require('/Users/quangthinh/Documents/Teamsoft/nestapi/web/src/models/story.js').default) });
   return app;
 }
 
