@@ -5,7 +5,7 @@ import { Form } from 'antd';
 import moment from 'moment';
 import router from 'umi/router';
 
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import PageContainer from '@/components/PageContainer';
 
 import {
   createValidationCallback,
@@ -40,7 +40,7 @@ function LocationCountry({ location }) {
   const [filterQuery, handleQuery] = useQuery(null, handleQueryChange);
 
   return (
-    <PageHeaderWrapper title={formatMessage({ id: 'module.location.country.pageTitle' })}>
+    <PageContainer title={formatMessage({ id: 'module.location.country.pageTitle' })}>
       <PageContent>
         <FilterHeader>
           <Search
@@ -57,7 +57,7 @@ function LocationCountry({ location }) {
           columns={columns}
         />
       </PageContent>
-    </PageHeaderWrapper>
+    </PageContainer>
   );
 }
 

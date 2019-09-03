@@ -21,6 +21,7 @@ import Exception403 from '../pages/Exception/403';
 
 import './BasicLayout.less';
 import { memoizeOneFormatter } from '@/utils/menu';
+import { PageProvider } from './PageContext';
 
 const { Content } = Layout;
 
@@ -100,6 +101,7 @@ export default class BasicLayout extends React.PureComponent {
     // rendering: true,
     isMobile: false,
     menuData: this.getMenuData(), // eslint-disable-line
+    title: ''
   };
 
   componentDidMount() {
@@ -125,11 +127,11 @@ export default class BasicLayout extends React.PureComponent {
       payload: { routes, authority },
     });
 
-    // this.renderRef = requestAnimationFrame(() => {
-    //   this.setState({
-    //     rendering: false,
-    //   });
-    // });
+    this.renderRef = requestAnimationFrame(() => {
+      this.setState({
+        rendering: false,
+      });
+    });
     this.enquireHandler = enquireScreen(mobile => {
       const { isMobile } = this.state;
       if (isMobile !== mobile) {
@@ -141,8 +143,8 @@ export default class BasicLayout extends React.PureComponent {
   }
 
   componentDidUpdate(preProps) {
-    // After changing to phone mode,
-    // if collapsed is true, you need to click twice to display
+    // // After changing to phone mode,
+    // // if collapsed is true, you need to click twice to display
     this.breadcrumbNameMap = this.getBreadcrumbNameMap();
     const { isMobile } = this.state;
     const { collapsed } = this.props;
@@ -152,16 +154,18 @@ export default class BasicLayout extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    // cancelAnimationFrame(this.renderRef);
+    cancelAnimationFrame(this.renderRef);
     unenquireScreen(this.enquireHandler);
   }
 
   getContext() {
     const { location } = this.props;
+
     return {
       location,
       breadcrumbNameMap: this.breadcrumbNameMap,
       pageTitle: this.getPageTitle(location.pathname),
+      setPageTitle: title => this.setState({ title })
     };
   }
 
@@ -189,6 +193,7 @@ export default class BasicLayout extends React.PureComponent {
       });
     };
     mergeMenuAndRouter(this.getMenuData());
+
     return routerMap;
   }
 
@@ -196,6 +201,7 @@ export default class BasicLayout extends React.PureComponent {
     const pathKey = Object.keys(this.breadcrumbNameMap).find(key =>
       pathToRegexp(key).test(pathname)
     );
+
     return this.breadcrumbNameMap[pathKey];
   };
 
@@ -203,7 +209,7 @@ export default class BasicLayout extends React.PureComponent {
     const currRouterData = this.matchParamsPath(pathname);
 
     if (!currRouterData) {
-      return null;
+      return this.state.title;
     }
 
     // untitle
@@ -212,10 +218,11 @@ export default class BasicLayout extends React.PureComponent {
         id: currRouterData.locale || currRouterData.name,
         defaultMessage: currRouterData.name,
       });
+
       return message;
     }
 
-    return null;
+    return this.state.title;
   };
 
   getLayoutStyle = () => {
@@ -299,6 +306,7 @@ export default class BasicLayout extends React.PureComponent {
             {...this.props}
           />
         )}
+
         <SiderMenu
           logo={logo}
           Authorized={Authorized}
@@ -309,12 +317,7 @@ export default class BasicLayout extends React.PureComponent {
           {...this.props}
         />
 
-        <Layout
-          style={{
-            ...this.getLayoutStyle(),
-            minHeight: '100vh',
-          }}
-        >
+        <Layout style={{ minHeight: '100vh' }}>
           <Header
             menuData={menuData}
             handleMenuCollapse={this.handleMenuCollapse}
@@ -335,22 +338,20 @@ export default class BasicLayout extends React.PureComponent {
       </Layout>
     );
 
-    const Container = (
-      <ContainerQuery query={query}>
-        {params => (
-          <Context.Provider value={this.getContext()}>
-            <div className={classNames(params)}>{layout}</div>
-          </Context.Provider>
-        )}
-      </ContainerQuery>
-    );
-
-    const title = this.getPageTitle(pathname);
     return (
-      <React.Fragment>
-        {title ? <DocumentTitle title={title}>{Container}</DocumentTitle> : Container}
-        {this.renderSettingDrawer()}
-      </React.Fragment>
-    );
+      <PageProvider>
+        <ContainerQuery query={query}>
+          {params => {
+            const title = this.getPageTitle(pathname);
+            return (
+              <Context.Provider value={this.getContext()}>
+                <div className={classNames(params)}>{layout}</div>
+              </Context.Provider>
+            )
+          }}
+        </ContainerQuery>
+      </PageProvider>
+
+    )
   }
 }

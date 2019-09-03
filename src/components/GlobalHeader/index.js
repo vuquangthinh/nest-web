@@ -1,45 +1,37 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { useMemo, Fragment, useContext } from 'react';
 import Link from 'umi/link';
 import { connect } from 'dva';
 import styles from './index.less';
 import RightContent from './RightContent';
-import MenuContext from '@/layouts/MenuContext';
+import PageContext from '@/layouts/PageContext';
 
-@connect(state => ({
-  application: state.global.application,
-}))
-export default class GlobalHeader extends PureComponent {
 
-  renderLogo() {
-    const { isMobile, collapsed, logo, application } = this.props;
+function GlobalHeader(props) {
+  const [title] = useContext(PageContext);
+  const { isMobile, collapsed, logo, application } = props;
 
-    if (!collapsed) {
-      return null;
-    }
+  const Logo = useMemo(() => (
+    collapsed &&
+    <Fragment>
+      {isMobile && (
+        <Link to="/" className={styles.logo} key="logo">
+          <img src={logo} alt="logo" width="32" />
+        </Link>
+      )}
+      {/* <span className={styles.appName}>{application.headerName}</span> */}
+    </Fragment>
+  ), [logo, isMobile, collapsed]);
 
-    return (
-      <Fragment>
-        {isMobile && (
-          <Link to="/" className={styles.logo} key="logo">
-            <img src={logo} alt="logo" width="32" />
-          </Link>
-        )}
-        {/* <span className={styles.appName}>{application.headerName}</span> */}
-      </Fragment>
-    );
-  }
+  return (
+    <div className={styles.header}>
+      {Logo}
 
-  render() {
-    return (
-      <div className={styles.header}>
-        {this.renderLogo()}
-
-        <MenuContext.Consumer>
-          {value => <span className={styles.appPageTitle}>{value.pageTitle}</span>}
-        </MenuContext.Consumer>
-
-        <RightContent {...this.props} />
-      </div>
-    );
-  }
+      <span className={styles.appPageTitle}>{title}</span>
+      <RightContent {...props} />
+    </div>
+  );
 }
+
+export default connect(state => ({
+  application: state.global.application,
+}))(GlobalHeader)

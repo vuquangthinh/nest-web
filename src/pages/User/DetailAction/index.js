@@ -7,7 +7,7 @@ import Link from 'umi/link';
 
 function DetailAction({ id }) {
   return (
-    <Link to={`users/${id}`}>
+    <Link to={`/users/${id}`}>
       <IconButton title={formatMessage({ id: 'common.action.changePass.tooltip.name' })} icon="fa::user-cog" />
     </Link>
   );

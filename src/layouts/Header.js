@@ -77,9 +77,9 @@ class HeaderView extends PureComponent {
   handleNoticeVisibleChange = visible => {
     if (visible) {
       const { dispatch } = this.props;
-      dispatch({
-        type: 'global/git ps',
-      });
+      // dispatch({
+      //   type: 'global/changeLayoutCollapsed',
+      // });
     }
   };
 

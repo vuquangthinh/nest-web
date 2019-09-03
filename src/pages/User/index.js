@@ -9,7 +9,7 @@ import router from 'umi/router';
 
 import StandardTable from '@/components/StandardTable';
 import ToggleFilter from '@/components/FilterHeader/ToggleFilter';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import PageContainer from '@/components/PageContainer';
 import { EMPTY_ARRAY } from '@/constants';
 
 import { createValidationCallback, getConstantTitle, clearSortParams, extractFilterQueryString } from '@/utils/utils';
@@ -110,7 +110,7 @@ function UserPage({ statuses, location, types }) {
   const [filterQuery, handleQuery] = useQuery(currentTabSelection, handleQueryChange);
 
   return (
-    <PageHeaderWrapper title={formatMessage({ id: 'module.user.pageTitle' })}>
+    <PageContainer title={formatMessage({ id: 'module.user.pageTitle' })}>
       <PageContent>
         <FilterHeader
           current={currentTabSelection}
@@ -147,7 +147,7 @@ function UserPage({ statuses, location, types }) {
           columns={columns}
         />
       </PageContent>
-    </PageHeaderWrapper>
+    </PageContainer>
   );
 }
 

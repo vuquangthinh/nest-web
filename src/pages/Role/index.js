@@ -6,7 +6,7 @@ import { Form, Col, Checkbox, Tooltip } from 'antd';
 import moment from 'moment';
 import router from 'umi/router';
 
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import PageContainer from '@/components/PageContainer';
 
 import {
   extractFilterQueryString
@@ -62,7 +62,7 @@ function RolePage({ location }) {
   const [filterQuery, handleQuery] = useQuery(null, handleQueryChange);
 
   return (
-    <PageHeaderWrapper title={formatMessage({ id: 'module.role.pageTitle' })}>
+    <PageContainer title={formatMessage({ id: 'module.role.pageTitle' })}>
       <PageContent>
         <FilterHeader>
           <Search
@@ -81,7 +81,7 @@ function RolePage({ location }) {
           />
         )}
       </PageContent>
-    </PageHeaderWrapper>
+    </PageContainer>
   );
 }
 

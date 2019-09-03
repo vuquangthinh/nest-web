@@ -410,7 +410,8 @@ export default {
   // #endregion
 
   // #region USER
-  'menu.user.all': 'Users',
+  'menu.user': 'Users',
+  'menu.user.all': 'List all',
   'menu.setting.user': 'Users',
   'module.user.search.query': 'Search for a name, a email...',
   'module.user.pageTitle': 'Users',
@@ -488,9 +489,13 @@ export default {
 
   // #endregion
 
+  // #region USER DETAIL
+  'module.userdetail.pageTitle': 'User: {title}',
+  // #endregion
+
   // #region ROLE
-  'menu.role': 'Role',
-  'menu.role.pageTitle': 'Role & Permissions',
+  'menu.user.role': 'Roles & Permissions',
+  'module.role.pageTitle': 'Role & Permissions',
   'menu.user.role': 'Roles & Permissions',
   'module.role.search.query': 'Search permissions',
   'module.role.grid.permission': 'Permissions',

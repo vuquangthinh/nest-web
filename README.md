@@ -43,5 +43,5 @@ Thêm: menu.asset vào locales/<lang>.js
 Để tạo title head
 => 
 ```
-<PageHeaderWrapper title={formatMessage({ id: 'module.asset.pageTitle' })}>
+<PageContainer title={formatMessage({ id: 'module.asset.pageTitle' })}>
 ```
