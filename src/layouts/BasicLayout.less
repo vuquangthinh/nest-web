@@ -2,39 +2,43 @@ html,
 body,
 #root {
   height: 100%;
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
-    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
 
   background: @content-background-color;
 }
 
 :global {
-
-
   /* Chrome/Safari and web-kit-based browsers
     (if it doesn't work, try maybe also on the parent/wrapper)
   */
   ::-webkit-file-upload-button {
     cursor: pointer;
   }
-  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: red;
     opacity: 1; /* Firefox */
   }
 
   /* IE11 (if it doesn't work, try maybe also on the parent/wrapper) */
-  input[type='file'] {
+  input[type="file"] {
     cursor: pointer;
   }
 
-  .ant-menu-dark .ant-menu-item, .ant-menu-dark .ant-menu-item-group-title, .ant-menu-dark .ant-menu-item > a,
-  .ant-menu-dark .ant-menu-submenu, .ant-menu-inline .ant-menu-submenu-title {
+  .ant-menu-dark .ant-menu-item,
+  .ant-menu-dark .ant-menu-item-group-title,
+  .ant-menu-dark .ant-menu-item > a,
+  .ant-menu-dark .ant-menu-submenu,
+  .ant-menu-inline .ant-menu-submenu-title {
     color: @drawer-background-color;
   }
 
   .ant-menu-dark .ant-menu-item:hover > a,
-  .ant-menu-dark .ant-menu-item-selected > a, .ant-menu-dark .ant-menu-item-selected > a:hover {
+  .ant-menu-dark .ant-menu-item-selected > a,
+  .ant-menu-dark .ant-menu-item-selected > a:hover {
     color: @primary-color;
   }
 
@@ -47,12 +51,12 @@ body,
 
   .ant-menu-dark {
     .ant-menu-submenu {
-        .ant-menu-submenu-title > span {
-          .fas {
-            font-size: 18px;
-            margin-left: 1px;
-          }
+      .ant-menu-submenu-title > span {
+        .fas {
+          font-size: 18px;
+          margin-left: 1px;
         }
+      }
     }
     .ant-menu-item {
       > a {
@@ -85,11 +89,11 @@ body,
   // }
 
   .ant-btn {
-    background-color: @border-color-base;
+    // background-color: @border-color-base;
     height: 40px;
   }
   .ant-btn-primary {
-    background-color: @primary-color;
+    //   background-color: @primary-color;
     font-weight: bold;
   }
 
@@ -98,7 +102,7 @@ body,
   }
 
   .ant-form-item-label > label::after {
-    content: '';
+    content: "";
   }
 
   .ant-form-item-required::before {
@@ -106,7 +110,7 @@ body,
   }
 
   .ant-form-item-label > .ant-form-item-required::after {
-    content: '*';
+    content: "*";
     color: #f5222d;
   }
   .ant-form-item-label {
@@ -142,17 +146,25 @@ body,
   }
 
   .ant-select-selection--multiple {
-    >ul > li,
+    > ul > li,
     .ant-select-selection__rendered > ul > li {
       line-height: 36px;
       height: 36px;
     }
   }
 
+  .ant-pagination-options {
+    .ant-select-selection-selected-value,
+    .ant-select-selection__rendered,
+    .ant-select-selection--single {
+      height: 32px;
+      line-height: 30px;
+    }
+  }
+
   // .antd-pro-components-sider-menu-index-fixSiderbar .ant-menu-root {
   //   height: calc(100vh - 128px) !important;
   // }
-
 
   .input-row {
     display: flex;

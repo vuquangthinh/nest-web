@@ -1,60 +1,60 @@
-import React from 'react';
-import { connect } from 'dva';
-import _ from 'lodash';
-import { Form, Button, Input, Col, Skeleton, Row } from 'antd';
-import { formatMessage } from 'umi/locale';
-import router from 'umi/router';
-import moment from 'moment';
-import AeDrawer from '@/components/AeDrawer';
-import Header from '@/components/AeDrawer/Header';
-import MetaDetail from '@/components/AeDrawer/MetaDetail';
-import Actions from '@/components/AeDrawer/Actions';
-import Footer from '@/components/AeDrawer/Footer';
-import model from '../models';
-import { createValidationCallback } from '@/utils/utils';
-import { getAuthority } from '@/utils/authority';
-import * as language from '@/services/language';
+import React from "react";
+import { connect } from "dva";
+import _ from "lodash";
+import { Form, Button, Input, Col, Skeleton, Row } from "antd";
+import { formatMessage } from "umi/locale";
+import router from "umi/router";
+import moment from "moment";
+import AeDrawer from "@/components/AeDrawer";
+import Header from "@/components/AeDrawer/Header";
+import MetaDetail from "@/components/AeDrawer/MetaDetail";
+import Actions from "@/components/AeDrawer/Actions";
+import Footer from "@/components/AeDrawer/Footer";
+import model from "../models";
+import { createValidationCallback } from "@/utils/utils";
+import { getAuthority } from "@/utils/authority";
+import * as language from "@/services/language";
 
-import Selection from '@/components/Selection';
-import RemoteServiceSelect from '@/components/RemoteServiceSelect';
-import DateInput from '@/components/DateInput';
-import PictureInput from '@/components/PictureInput';
-import PhoneNumberInput from '@/components/PhoneNumberInput';
-import { create } from '@/services/user';
+import Selection from "@/components/Selection";
+import RemoteServiceSelect from "@/components/RemoteServiceSelect";
+import DateInput from "@/components/DateInput";
+import PictureInput from "@/components/PictureInput";
+import PhoneNumberInput from "@/components/PhoneNumberInput";
+import { create } from "@/services/user";
 // import styles from '@/pages/User/index.less';
 
 const authority = getAuthority();
-const isAdmin = authority.includes('admin');
+const isAdmin = authority.includes("admin");
 
 const getRecord = _.memoize(state => ({
-  id: '<empty>',
-  dateOfBirth: moment('1900-01-01'),
+  id: "<empty>",
+  dateOfBirth: moment("1900-01-01"),
   status: 1,
   roleId: isAdmin ? 1 : 2,
   languageId: 2,
   type: 1,
   companyId: isAdmin ? state.identity.companyId : 1,
-  over: 1,
+  over: 1
 }));
 
 @connect(state => ({
   listUrl: state[model.namespace].url.list,
   record: getRecord(state),
-  identity: state.identity,
+  identity: state.identity
 }))
 @Form.create()
 class CreateDrawer extends React.Component {
   static defaultProps = {
     loading: false,
     record: {
-      created: 'Jean Dupont',
-      created_by: '22349292930',
-      createdAt: moment(),
-    },
+      created: "Jean Dupont",
+      created_by: "22349292930",
+      createdAt: moment()
+    }
   };
 
   state = {
-    submitLoading: false,
+    submitLoading: false
   };
 
   handleClose = () => {
@@ -69,14 +69,14 @@ class CreateDrawer extends React.Component {
       if (err) return;
 
       this.setState({
-        submitLoading: true,
+        submitLoading: true
       });
 
       const response = await create(values);
 
       if (response.success) {
         notification.success({
-          message: formatMessage({ id: 'common.notification.createSuccess' }),
+          message: formatMessage({ id: "common.notification.createSuccess" })
         });
       }
 
@@ -85,15 +85,15 @@ class CreateDrawer extends React.Component {
         onSuccess: () => {
           this.handleClose();
           this.setState({
-            submitLoading: false,
+            submitLoading: false
           });
-          router.push(listUrl, '/users');
+          router.push(listUrl, "/users");
         },
         onFail: () => {
           this.setState({
-            submitLoading: false,
+            submitLoading: false
           });
-        },
+        }
       });
     });
   };
@@ -107,19 +107,22 @@ class CreateDrawer extends React.Component {
 
     return (
       <Header
-        title={formatMessage({ id: 'module.user.create.drawerTitle' })}
+        title={formatMessage({ id: "module.user.create.drawerTitle" })}
         actions={
           <Actions>
             <Button onClick={this.handleClose}>
-              {formatMessage({ id: 'common.actions.cancel' })}
+              {formatMessage({ id: "common.actions.cancel" })}
             </Button>
-            <Button type="primary" loading={submitLoading} onClick={this.handleSubmit}>
-              {formatMessage({ id: 'common.actions.save' })}
+            <Button
+              type="primary"
+              loading={submitLoading}
+              onClick={this.handleSubmit}
+            >
+              {formatMessage({ id: "common.actions.save" })}
             </Button>
           </Actions>
         }
-      >
-      </Header>
+      />
     );
   }
 
@@ -135,10 +138,14 @@ class CreateDrawer extends React.Component {
         actions={
           <Actions>
             <Button onClick={this.handleClose}>
-              {formatMessage({ id: 'common.actions.cancel' })}
+              {formatMessage({ id: "common.actions.cancel" })}
             </Button>
-            <Button type="primary" loading={submitLoading} onClick={this.handleSubmit}>
-              {formatMessage({ id: 'common.actions.save' })}
+            <Button
+              type="primary"
+              loading={submitLoading}
+              onClick={this.handleSubmit}
+            >
+              {formatMessage({ id: "common.actions.save" })}
             </Button>
           </Actions>
         }
@@ -155,38 +162,40 @@ class CreateDrawer extends React.Component {
     return (
       <Form
         style={{
-          width: '100%',
+          width: "100%"
         }}
       >
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.username' })}
+              label={formatMessage({ id: "module.user.create.username" })}
             >
-              {getFieldDecorator('username', {
+              {getFieldDecorator("username", {
                 rules: [
                   {
                     required: true,
                     transform: val => _.toString(val).trim(),
-                    message: formatMessage({ id: 'module.user.validate.required.username' }),
-                  },
+                    message: formatMessage({
+                      id: "module.user.validate.required.username"
+                    })
+                  }
                   // {
                   //   pattern: /^[^\s](.*)[^\s]$/,
                   //   message: formatMessage({ id: 'module.user.validate.withoutSpace.username' }),
                   // },
                 ],
-                initialValue: record.username,
+                initialValue: record.username
               })(<Input />)}
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.status' })}
+              label={formatMessage({ id: "module.user.create.status" })}
             >
-              {getFieldDecorator('status', {
-                initialValue: record.status,
+              {getFieldDecorator("status", {
+                initialValue: record.status
               })(<Selection type="UserStatus" />)}
             </Form.Item>
           </Col>
@@ -196,20 +205,20 @@ class CreateDrawer extends React.Component {
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.firstName' })}
+              label={formatMessage({ id: "module.user.create.firstName" })}
             >
-              {getFieldDecorator('firstName', {
-                initialValue: record.firstName,
+              {getFieldDecorator("firstName", {
+                initialValue: record.firstName
               })(<Input />)}
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.lastName' })}
+              label={formatMessage({ id: "module.user.create.lastName" })}
             >
-              {getFieldDecorator('lastName', {
-                initialValue: record.lastName,
+              {getFieldDecorator("lastName", {
+                initialValue: record.lastName
               })(<Input />)}
             </Form.Item>
           </Col>
@@ -219,46 +228,52 @@ class CreateDrawer extends React.Component {
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.email' })}
+              label={formatMessage({ id: "module.user.create.email" })}
             >
-              {getFieldDecorator('email', {
-                validateTrigger: 'onBlur',
+              {getFieldDecorator("email", {
+                validateTrigger: "onBlur",
                 rules: [
                   {
-                    type: 'email',
-                    message: formatMessage({ id: 'module.user.validate.format.email' }),
+                    type: "email",
+                    message: formatMessage({
+                      id: "module.user.validate.format.email"
+                    })
                   },
                   {
                     validator: (rule, email) => {
-                      const phone = form.getFieldValue('phone') || '';
+                      const phone = form.getFieldValue("phone") || "";
                       if (email) {
                         if (!phone) {
-                          form.resetFields(['phone']);
+                          form.resetFields(["phone"]);
                         }
                         return [];
                       }
 
-                      if (!phone && (email === '' || email === undefined)) {
+                      if (!phone && (email === "" || email === undefined)) {
                         return [
-                          new Error(formatMessage({ id: 'module.user.validate.required.email' })),
+                          new Error(
+                            formatMessage({
+                              id: "module.user.validate.required.email"
+                            })
+                          )
                         ];
                       }
 
                       return [];
-                    },
-                  },
+                    }
+                  }
                 ],
-                initialValue: record.email,
+                initialValue: record.email
               })(<Input />)}
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.password' })}
+              label={formatMessage({ id: "module.user.create.password" })}
             >
-              {getFieldDecorator('password', {
-                initialValue: record.password,
+              {getFieldDecorator("password", {
+                initialValue: record.password
               })(<Input.Password />)}
             </Form.Item>
           </Col>
@@ -268,39 +283,43 @@ class CreateDrawer extends React.Component {
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.phone' })}
+              label={formatMessage({ id: "module.user.create.phone" })}
             >
-              {getFieldDecorator('phone', {
-                validateTrigger: 'onBlur',
+              {getFieldDecorator("phone", {
+                validateTrigger: "onBlur",
                 normalize: value => {
-                  if (!value) return '';
+                  if (!value) return "";
 
-                  return value.replace(' ', '');
+                  return value.replace(" ", "");
                 },
                 rules: [
                   {
                     validator: (rule, phone) => {
-                      const email = form.getFieldValue('email') || '';
+                      const email = form.getFieldValue("email") || "";
 
                       if (phone) {
                         if (!email) {
-                          form.resetFields(['email']);
+                          form.resetFields(["email"]);
                         }
 
                         return [];
                       }
 
-                      if (!email && (phone === '' || phone === undefined)) {
+                      if (!email && (phone === "" || phone === undefined)) {
                         return [
-                          new Error(formatMessage({ id: 'module.user.validate.required.phone' })),
+                          new Error(
+                            formatMessage({
+                              id: "module.user.validate.required.phone"
+                            })
+                          )
                         ];
                       }
 
                       return [];
-                    },
-                  },
+                    }
+                  }
                 ],
-                initialValue: record.phone,
+                initialValue: record.phone
               })(<PhoneNumberInput />)}
             </Form.Item>
           </Col>
@@ -308,10 +327,10 @@ class CreateDrawer extends React.Component {
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.secondaryEmail' })}
+              label={formatMessage({ id: "module.user.create.secondaryEmail" })}
             >
-              {getFieldDecorator('secondaryEmail', {
-                initialValue: record.secondaryEmail,
+              {getFieldDecorator("secondaryEmail", {
+                initialValue: record.secondaryEmail
               })(<Input />)}
             </Form.Item>
           </Col>
@@ -321,10 +340,10 @@ class CreateDrawer extends React.Component {
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.type' })}
+              label={formatMessage({ id: "module.user.create.type" })}
             >
-              {getFieldDecorator('type', {
-                initialValue: record.type,
+              {getFieldDecorator("type", {
+                initialValue: record.type
               })(<Selection type="UserType" />)}
             </Form.Item>
           </Col>
@@ -334,10 +353,10 @@ class CreateDrawer extends React.Component {
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.dateOfBirth' })}
+              label={formatMessage({ id: "module.user.create.dateOfBirth" })}
             >
-              {getFieldDecorator('dateOfBirth', {
-                initialValue: record.dateOfBirth,
+              {getFieldDecorator("dateOfBirth", {
+                initialValue: record.dateOfBirth
               })(<DateInput />)}
             </Form.Item>
             {/* <Form.Item
@@ -357,10 +376,10 @@ class CreateDrawer extends React.Component {
           <Col span={12}>
             <Form.Item
               className="input-row"
-              label={formatMessage({ id: 'module.user.create.avatar' })}
+              label={formatMessage({ id: "module.user.create.avatar" })}
             >
-              {getFieldDecorator('avatar', {
-                initialValue: record.avatar,
+              {getFieldDecorator("avatar", {
+                initialValue: record.avatar
               })(<PictureInput />)}
             </Form.Item>
           </Col>

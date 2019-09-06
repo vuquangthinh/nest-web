@@ -5,6 +5,7 @@ import styles from './index.less';
 export default function AeDrawer({ visible, onClose, children, header, footer }) {
   return (
     <Modal
+      centered
       destroyOnClose
       className={styles.container}
       width={'auto'}

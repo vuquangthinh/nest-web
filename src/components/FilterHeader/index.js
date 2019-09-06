@@ -1,23 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import { Tabs } from 'antd';
-import styles from './index.less';
+import { Tabs } from "antd";
+import styles from "./index.less";
 
 const { TabPane } = Tabs;
 
-function FilterHeader({ tabs, current, onTabClick, children }) {
-
-  const [activeKey, setActiveKey] = useState(tabs.length === 0 ? null : tabs[0].value);
+function FilterHeader({ tabs, actions, current, onTabClick, children }) {
+  const [activeKey, setActiveKey] = useState(
+    tabs.length === 0 ? null : tabs[0].value
+  );
 
   // flick ui
-  useEffect(() => {
-    setTimeout(() => {
-      setActiveKey(current);
-    }, 100);
-  }, [current]);
+  useEffect(
+    () => {
+      setTimeout(() => {
+        setActiveKey(current);
+      }, 100);
+    },
+    [current]
+  );
 
   return (
     <div className={styles.container}>
+      {actions}
       <Tabs activeKey={String(activeKey)} onChange={onTabClick}>
         {tabs.map(tab => (
           <TabPane tab={tab.label} key={String(tab.value)} />
@@ -32,7 +37,7 @@ FilterHeader.defaultProps = {
   tabs: [],
   current: null,
   onTabClick: () => {},
-  children: null,
+  children: null
 };
 
 export default FilterHeader;
