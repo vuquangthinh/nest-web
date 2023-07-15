@@ -26,10 +26,15 @@ const codeMessage = {
 };
 
 function validateFormatTranformation({ message }) {
-  return message.reduce((r, m) => ({
-    ...r,
-    [m.property]: Object.keys(m.constraints).map(x => m.constraints[x])
-  }), {});
+  if (Array.isArray(message)) {
+
+    return message.reduce((r, m) => ({
+      ...r,
+      [m.property]: Object.keys(m.constraints).map(x => m.constraints[x])
+    }), {});
+  }
+
+  return {};
 }
 
 const checkStatus = newOptions => async response => {

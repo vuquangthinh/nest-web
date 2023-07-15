@@ -11,7 +11,7 @@ ENV CI=true
 WORKDIR /usr/src/app/
 
 COPY package.json ./
-RUN npm install --silent --no-cache
+RUN npm install --silent
 
 COPY . .
 

@@ -73,7 +73,7 @@ class LoginPage extends Component {
     const { submitting, application } = this.props;
     // const { autoLogin } = this.state;
     return (
-      <DocumentTitle title={formatMessage({ id: 'module.login.pageTitle'})}>
+      <DocumentTitle title={formatMessage({ id: 'module.login.pageTitle' })}>
         <div className={styles.main}>
           <Login
             onSubmit={this.handleSubmit}

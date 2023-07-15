@@ -63,7 +63,7 @@ const tk = new TokenManagement({
       return;
     }
 
-    invokeRequest('post', '/auth/token', {
+    invokeRequest('post', '/auth/refresh', {
       refreshToken,
     })
       .then(result => {

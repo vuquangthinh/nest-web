@@ -29,7 +29,8 @@ const useLocalStorage = true;
 
 import { LocaleProvider } from 'antd';
 import moment from 'moment';
-let defaultAntd = require('antd/lib/locale-provider/en_US');
+import 'moment/locale/vi';
+let defaultAntd = require('antd/lib/locale-provider/vi_VN');
 defaultAntd = defaultAntd.default || defaultAntd;
 
 const localeInfo = {
@@ -82,14 +83,14 @@ const localeInfo = {
 
 class LocaleWrapper extends React.Component{
   state = {
-    locale: 'en-US',
+    locale: 'vi-VN',
   };
   getAppLocale(){
     let appLocale = {
-      locale: 'en-US',
+      locale: 'vi-VN',
       messages: {},
-      data: require('react-intl/locale-data/en'),
-      momentLocale: '',
+      data: require('react-intl/locale-data/vi'),
+      momentLocale: 'vi',
     };
 
     const runtimeLocale = require('umi/_runtimePlugin').mergeConfig('locale') || {};
@@ -110,7 +111,7 @@ class LocaleWrapper extends React.Component{
     } else if(localeInfo[runtimeLocaleDefault]){
       appLocale = localeInfo[runtimeLocaleDefault];
     } else {
-      appLocale = localeInfo['en-US'] || appLocale;
+      appLocale = localeInfo['vi-VN'] || appLocale;
     }
     window.g_lang = appLocale.locale;
     appLocale.data && addLocaleData(appLocale.data);

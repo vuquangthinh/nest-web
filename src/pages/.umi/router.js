@@ -196,7 +196,7 @@ const routes = [
         name: 'user',
         icon: 'fa::users',
         path: '/users',
-        authority: ['admin'],
+        authority: ['@'],
         routes: [
           {
             icon: 'fa::users',

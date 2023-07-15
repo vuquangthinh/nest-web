@@ -3,7 +3,7 @@ export const API_URL = (() => {
     return localStorage.getItem('__APIURL__');
   }
 
-  return process.env.APP__API_URL || 'http://localhost:3001';
+  return process.env.APP__API_URL || 'http://localhost:3200';
 })();
 
 if (localStorage.getItem('___DEBUG___')) {

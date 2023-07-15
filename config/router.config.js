@@ -66,7 +66,7 @@ export default [
         name: 'user',
         icon: 'fa::users',
         path: '/users',
-        authority: ['admin'],
+        authority: ['@'],
         routes: [
           {
             icon: 'fa::users',
